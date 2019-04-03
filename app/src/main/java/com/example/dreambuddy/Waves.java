@@ -1,19 +1,15 @@
 package com.example.dreambuddy;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
-
-
+public class Waves extends AppCompatActivity {
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -22,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-
+                    launchHome();
                     return true;
                 case R.id.navigation_learn:
                     launchLearn();
@@ -31,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
                     launchNewPost();
                     return true;
                 case R.id.navigation_waves:
-                    launchWaves();
+
                     return true;
                 case R.id.navigation_profile:
                     launchProfile();
@@ -43,48 +39,34 @@ public class MainActivity extends AppCompatActivity {
 
     public void launchLearn(){
         Intent intent = new Intent(this, Learn.class);
-        MainActivity.this.startActivity(intent);
+        Waves.this.startActivity(intent);
     }
 
-    public void launchWaves(){
-        Intent intent = new Intent(this, Waves.class);
-        MainActivity.this.startActivity(intent);
+    public void launchHome(){
+        Intent intent = new Intent(this, MainActivity.class);
+        Waves.this.startActivity(intent);
     }
 
     public void launchProfile(){
         Intent intent = new Intent(this, Profile.class);
-        MainActivity.this.startActivity(intent);
+        Waves.this.startActivity(intent);
     }
 
     public void launchNewPost(){
         Intent intent = new Intent(this, NewPost.class);
-        MainActivity.this.startActivity(intent);
-    }
-
-    private void setupViewPager(ViewPager v) {
-        SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
-        adapter.addFragment(new public_frag(), "Public");
-        adapter.addFragment(new private_frag(), "Private");
-        v.setAdapter(adapter);
+        Waves.this.startActivity(intent);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_waves);
 
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.action_bar);
+        TextView title = findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
+        title.setText(R.string.title_waves);
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
-        SectionsPageAdapter m = new SectionsPageAdapter(getSupportFragmentManager());
-        ViewPager vp = findViewById(R.id.pager);
-        setupViewPager(vp);
-
-        TabLayout tl = findViewById(R.id.tabs);
-        tl.setupWithViewPager(vp);
-
     }
-
 }
