@@ -9,7 +9,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -63,8 +62,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager v) {
         SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
-        adapter.addFragment(new public_frag(), "Public");
-        adapter.addFragment(new private_frag(), "Private");
+        adapter.addFragment(new Public_frag(), "Public");
+        adapter.addFragment(new Private_frag(), "Private");
         v.setAdapter(adapter);
     }
 
