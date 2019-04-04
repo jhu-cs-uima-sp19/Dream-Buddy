@@ -20,6 +20,7 @@ public class Public_frag extends Fragment{
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.public_tab, container, false);
+
         recyclerView = (RecyclerView) view.findViewById(R.id.public_recycler_view);
 
         // use this setting to improve performance if you know that changes
