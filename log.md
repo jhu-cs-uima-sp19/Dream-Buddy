@@ -34,3 +34,16 @@ Discussion:
 
 Tasks Accomplished:
 * Organized Project Board on Github
+
+#### 4/11/19
+4:15 - 4:30pm
+
+Brice, Nico, Evan, Ani
+
+Discussion:
+* Bottom Navigation Bar needs to not pop screen up - Ani
+* Fix ListView, add Post views
+* Connecting Firebase to Journal Entry class
+
+Tasks Accomplished:
+* Set meeting time for Sunday (1pm)
