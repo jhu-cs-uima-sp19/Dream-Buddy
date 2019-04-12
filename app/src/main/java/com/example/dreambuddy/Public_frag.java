@@ -62,7 +62,7 @@ public class Public_frag extends Fragment{
     private void startDatabaseListener() {
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference myRef = database.getReference("posts");
-        myRef.push().setValue(new JournalEntry("Super cool", "evanmays", "Cool", null, false));
+
         Toast.makeText(getContext(), "Here", Toast.LENGTH_SHORT).show();
         myRef.addValueEventListener(new ValueEventListener() {
             @Override

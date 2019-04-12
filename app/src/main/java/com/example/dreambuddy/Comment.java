@@ -16,14 +16,14 @@ public class Comment {
     /** Username of author. */
     private String username;
 
-    private Comment() {
-        this.date = new Date();
-    }
-
     public Comment(String body, String username) {
-        this();
+        this.date = new Date();
         this.body = body;
         this.username = username;
+    }
+
+    public Comment() {
+
     }
 
     public Date getDate() {
