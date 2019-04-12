@@ -73,7 +73,10 @@ public class Public_frag extends Fragment{
                 Toast.makeText(getContext(), "Loaded", Toast.LENGTH_SHORT).show();
                 for(DataSnapshot d: dataSnapshot.getChildren()) {
                     JournalEntry cur = d.getValue(JournalEntry.class);
-                    myDataset.add(cur);
+                    if (!cur.getIsPrivate()) {
+                        //this is a public post
+                        myDataset.add(cur);
+                    }
                 }
 
                 mAdapter.notifyDataSetChanged();
