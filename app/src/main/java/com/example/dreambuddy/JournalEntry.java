@@ -38,8 +38,8 @@ public class JournalEntry {
     /** Whether the post is private or public. */
     private boolean isPrivate;
 
-    /** Internal ID number of the journal post. */
-    private int id;
+    /** Internal ID code of the journal post. */
+    private String id;
 
     private JournalEntry() {
         this.date = new Date();
@@ -47,7 +47,7 @@ public class JournalEntry {
         this.body = "";
         this.likes = 0;
         comments = new ArrayList<>();
-        // id = last id in database + 1?
+        //id is set when we save to firebase for the first time
     }
 
     public JournalEntry(String title, String username, String body, MediaPlayer audioContent, boolean isPrivate) {
@@ -87,9 +87,15 @@ public class JournalEntry {
         this.body = body;
     }
 
-    public int getLikes() {
-        return likes;
+    public String getId() {
+        return id;
     }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public int getLikes() { return likes; }
 
     public void setLikes(int likes) {
         this.likes = likes;
@@ -128,13 +134,21 @@ public class JournalEntry {
         this.isPrivate = isPrivate;
     }
 
-    public void saveToFirebase() {
+    public void createToFirebase() {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("message");
+        DatabaseReference myRef = database.getReference("posts");
 
-        //doesnt save comments yet
+        //if no comments exist, this won't save comments. So no comments field shows in firebase
 
-        //myRef.setValue("Hello, World!");
-        myRef.push().setValue(this);
+        DatabaseReference pushedPostRef = myRef.push();
+        this.id = pushedPostRef.getKey();
+        pushedPostRef.setValue(this);
+    }
+
+    public void updateToFirebase() {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("posts");
+
+        myRef.child(this.id).setValue(this);
     }
 }
