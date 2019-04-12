@@ -1,5 +1,6 @@
 package com.example.dreambuddy;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -9,6 +10,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import java.util.ArrayList;
 
 public class Public_frag extends Fragment{
 
@@ -30,7 +33,10 @@ public class Public_frag extends Fragment{
         // use a linear layout manager
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
-        String[] myDataset = {"a", "b", "c", "d", "e", "f", "g", "h"};
+        ArrayList<JournalEntry> myDataset = new ArrayList<JournalEntry>(10);
+        myDataset.add(new JournalEntry("Super cool", "evanmays", "Cool", null, false));
+        myDataset.add(new JournalEntry("Almost cool", "evanmays", "Cool", null, false));
+        myDataset.add(new JournalEntry("not as cool", "evanmays", "Cool", null, false));
         // specify an adapter (see also next example)
         mAdapter = new MyAdapter(myDataset);
         recyclerView.setAdapter(mAdapter);

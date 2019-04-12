@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+
 public class Private_frag extends Fragment{
 
     private RecyclerView recyclerView;
@@ -30,7 +32,7 @@ public class Private_frag extends Fragment{
         // use a linear layout manager
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
-        String[] myDataset = {"1", "2", "3", "4", "5", "6", "7", "8"};
+        ArrayList<JournalEntry> myDataset = new ArrayList<JournalEntry>(10);
         // specify an adapter (see also next example)
         mAdapter = new MyAdapter(myDataset);
         recyclerView.setAdapter(mAdapter);
