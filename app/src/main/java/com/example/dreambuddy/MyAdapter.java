@@ -16,10 +16,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     // you provide access to all the views for a data item in a view holder
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
-        public TextView textView;
+        public TextView titleTextView;
+        public TextView likesTextView;
+
         public MyViewHolder(View v) {
             super(v);
-            textView = v.findViewById(R.id.postTitle);
+            titleTextView = v.findViewById(R.id.postTitle);
+            likesTextView = v.findViewById(R.id.likesCount);
         }
     }
 
@@ -45,7 +48,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     public void onBindViewHolder(MyViewHolder holder, int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        holder.textView.setText(mDataset.get(position).getTitle());
+        holder.titleTextView.setText(mDataset.get(position).getTitle());
+        holder.likesTextView.setText(String.valueOf(mDataset.get(position).getLikes()));
 
     }
 

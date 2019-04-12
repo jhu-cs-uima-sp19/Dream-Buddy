@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "489203819594",
+    "firebase_url": "https://dream-buddy-1.firebaseio.com",
+    "project_id": "dream-buddy-1",
+    "storage_bucket": "dream-buddy-1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:489203819594:android:6dff2ce1c700f348",
+        "android_client_info": {
+          "package_name": "com.example.dreambuddy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "489203819594-017binklbfts2ssrv3nc2tgkeqfc97cv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.dreambuddy",
+            "certificate_hash": "5438816a09bcf4ac4ff66bc73f8f25d2ec1a421a"
+          }
+        },
+        {
+          "client_id": "489203819594-o618td0dv7pmumvpqb6kk7fq31vgmtb1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-C-mY4DZxNYIUTC9Zttoj7ia8rAPlRRw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "489203819594-o618td0dv7pmumvpqb6kk7fq31vgmtb1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -2,6 +2,9 @@ package com.example.dreambuddy;
 
 import android.media.MediaPlayer;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -104,6 +107,10 @@ public class JournalEntry {
         return comments;
     }
 
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
     public void addComment(Comment comment) {
         this.comments.add(comment);
     }
@@ -119,5 +126,15 @@ public class JournalEntry {
 
     public void setIsPrivate(boolean isPrivate) {
         this.isPrivate = isPrivate;
+    }
+
+    public void saveToFirebase() {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("message");
+
+        //doesnt save comments yet
+
+        //myRef.setValue("Hello, World!");
+        myRef.push().setValue(this);
     }
 }
