@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".NewPost"></activity>
+        <activity android:name=".PopUpChecker1"
+            android:theme="@style/AppTheme.PopUp"
+            ></activity>
+        <activity android:name=".NewPost" />
         <activity android:name=".Profile" />
         <activity android:name=".Waves" />
         <activity android:name=".Learn" />

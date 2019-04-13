@@ -1,19 +1,15 @@
 package com.example.dreambuddy;
 
-import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
-public class NewPost extends AppCompatActivity {
+import com.example.dreambuddy.R;
 
-    ImageButton deleteAud;
+public class EditPost extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -35,23 +31,11 @@ public class NewPost extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_post);
+        setContentView(R.layout.activity_edit_post);
 
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.action_bar);
         TextView title = findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
-        title.setText(R.string.title_new_post);
-
-        deleteAud = (ImageButton) findViewById(R.id.delete);
-
-        deleteAud.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), PopUpChecker1.class);
-                startActivity(intent);
-            }
-        });
+        title.setText(R.string.title_edit_post);
     }
-
-
 }

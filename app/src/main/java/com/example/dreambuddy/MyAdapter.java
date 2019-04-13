@@ -1,5 +1,6 @@
 package com.example.dreambuddy;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -58,4 +59,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     public int getItemCount() {
         return mDataset.size();
     }
+
+    //public void launchEdit(){
+        //Intent intent = new Intent(this, EditPost.class);
+        //Public_frag.this.startActivity(intent);
+    //}
 }
