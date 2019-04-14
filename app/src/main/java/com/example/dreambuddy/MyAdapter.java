@@ -2,6 +2,7 @@ package com.example.dreambuddy;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -67,14 +68,25 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
                 context.startActivity(intent);
             }
         });
-        holder.editImageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, EditPost.class);
-                intent.putExtra("journalEntry", curEntry);
-                context.startActivity(intent);
-            }
-        });
+
+        SharedPreferences preferences = context.getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
+        final String curUsername = preferences.getString("username", "default user");
+        if (curEntry.getUsername().equals(curUsername)) {
+            //this user owns this post
+            holder.editImageButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, EditPost.class);
+                    intent.putExtra("journalEntry", curEntry);
+                    context.startActivity(intent);
+                }
+            });
+        }
+        else {
+            //this post belongs to another user
+            holder.editImageButton.setVisibility(View.INVISIBLE);
+        }
+
     }
 
     // Return the size of your dataset (invoked by the layout manager)
