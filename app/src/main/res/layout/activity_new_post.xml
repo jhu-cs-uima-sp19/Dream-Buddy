@@ -89,7 +89,7 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <EditText
-        android:id="@+id/title"
+        android:id="@+id/editPostTitle"
         android:layout_width="325dp"
         android:layout_height="67dp"
         android:layout_marginTop="60dp"
@@ -113,6 +113,6 @@
         android:text="Enter a description of your dream..."
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title" />
+        app:layout_constraintTop_toBottomOf="@+id/editPostTitle" />
 
 </android.support.constraint.ConstraintLayout>

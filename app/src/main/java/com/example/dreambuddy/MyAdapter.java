@@ -54,14 +54,23 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
+        final JournalEntry curEntry = mDataset.get(position);
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        holder.titleTextView.setText(mDataset.get(position).getTitle());
-        holder.likesTextView.setText(String.valueOf(mDataset.get(position).getLikes()));
+        holder.titleTextView.setText(curEntry.getTitle());
+        holder.likesTextView.setText(String.valueOf(curEntry.getLikes()));
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, NewPost.class);
+                context.startActivity(intent);
+            }
+        });
         holder.editImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, EditPost.class);
+                intent.putExtra("journalEntry", curEntry);
                 context.startActivity(intent);
             }
         });

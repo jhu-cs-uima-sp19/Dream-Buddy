@@ -5,11 +5,15 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.dreambuddy.R;
 
 public class EditPost extends AppCompatActivity {
+
+    JournalEntry post;
+    EditText titleEditTextView;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -37,5 +41,10 @@ public class EditPost extends AppCompatActivity {
         getSupportActionBar().setCustomView(R.layout.action_bar);
         TextView title = findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
         title.setText(R.string.title_edit_post);
+
+        this.post = (JournalEntry) getIntent().getSerializableExtra("journalEntry");
+
+        titleEditTextView = this.findViewById(R.id.editPostTitle);
+        titleEditTextView.setText(post.getTitle());
     }
 }

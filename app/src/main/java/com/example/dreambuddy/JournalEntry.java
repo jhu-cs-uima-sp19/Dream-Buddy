@@ -5,6 +5,7 @@ import android.media.MediaPlayer;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.List;
 /**
  * This class is used to facilitate working with data for a journal post.
  */
-public class JournalEntry {
+public class JournalEntry implements Serializable {
 
     /** The date created/last edited. */
     private Date date;
