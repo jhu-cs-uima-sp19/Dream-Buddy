@@ -19,18 +19,20 @@ public class Waves extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     launchHome();
+                    overridePendingTransition(0, 0);
                     return true;
                 case R.id.navigation_learn:
                     launchLearn();
+                    overridePendingTransition(0, 0);
                     return true;
                 case R.id.navigation_new_post:
                     launchNewPost();
                     return true;
                 case R.id.navigation_waves:
-
                     return true;
                 case R.id.navigation_profile:
                     launchProfile();
+                    overridePendingTransition(0, 0);
                     return true;
             }
             return false;

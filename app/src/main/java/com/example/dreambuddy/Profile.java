@@ -19,18 +19,20 @@ public class Profile extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     launchHome();
+                    overridePendingTransition(0, 0);
                     return true;
                 case R.id.navigation_learn:
                     launchLearn();
+                    overridePendingTransition(0, 0);
                     return true;
                 case R.id.navigation_new_post:
                     launchNewPost();
                     return true;
                 case R.id.navigation_waves:
                     launchWaves();
+                    overridePendingTransition(0, 0);
                     return true;
                 case R.id.navigation_profile:
-
                     return true;
             }
             return false;

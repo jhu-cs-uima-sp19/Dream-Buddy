@@ -21,19 +21,21 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-
                     return true;
                 case R.id.navigation_learn:
                     launchLearn();
+                    overridePendingTransition(0, 0);
                     return true;
                 case R.id.navigation_new_post:
                     launchNewPost();
                     return true;
                 case R.id.navigation_waves:
                     launchWaves();
+                    overridePendingTransition(0, 0);
                     return true;
                 case R.id.navigation_profile:
                     launchProfile();
+                    overridePendingTransition(0, 0);
                     return true;
             }
             return false;
