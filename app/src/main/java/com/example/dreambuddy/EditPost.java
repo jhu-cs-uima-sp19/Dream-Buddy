@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.example.dreambuddy.R;
@@ -14,6 +15,8 @@ public class EditPost extends AppCompatActivity {
 
     JournalEntry post;
     EditText titleEditTextView;
+    EditText bodyEditTextView;
+    Switch togglePublicPrivate;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -46,5 +49,11 @@ public class EditPost extends AppCompatActivity {
 
         titleEditTextView = this.findViewById(R.id.editPostTitle);
         titleEditTextView.setText(post.getTitle());
+
+        bodyEditTextView = this.findViewById(R.id.mainText);
+        bodyEditTextView.setText(post.getBody());
+
+        togglePublicPrivate = this.findViewById(R.id.toggle);
+        togglePublicPrivate.setChecked(post.getIsPrivate());
     }
 }
