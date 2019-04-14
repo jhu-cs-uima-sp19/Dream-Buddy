@@ -14,6 +14,7 @@
 
     //Other screens titles
     <string name="title_edit_post">Edit Post</string>
+    <string name="title_view_post">Dream Buddy</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

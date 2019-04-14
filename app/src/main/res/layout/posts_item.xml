@@ -9,11 +9,10 @@
     <TextView
         android:id="@+id/postTitle"
         android:layout_width="0dp"
-        android:layout_height="73dp"
+        android:layout_height="35dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
         android:text="Large Text"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
         app:layout_constraintBottom_toTopOf="@+id/empty_heart"
@@ -26,10 +25,9 @@
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_marginStart="12dp"
-        android:layout_marginBottom="8dp"
         android:text="0"
         android:textAlignment="textStart"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/empty_heart"
         app:layout_constraintStart_toEndOf="@+id/empty_heart" />
 
     <ImageView
@@ -37,7 +35,7 @@
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/empty_heart" />
@@ -47,9 +45,8 @@
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_marginStart="24dp"
-        android:layout_marginBottom="8dp"
         android:tint="@color/colorAccent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/likesCount"
         app:layout_constraintStart_toEndOf="@+id/likesCount"
         app:srcCompat="@drawable/baseline_comment_white_48dp" />
 
@@ -58,26 +55,31 @@
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_marginStart="12dp"
-        android:layout_marginBottom="8dp"
         android:text="0"
         android:textAlignment="textStart"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/comment"
         app:layout_constraintStart_toEndOf="@+id/comment" />
 
     <ImageButton
         android:id="@+id/editButton"
         android:layout_width="24dp"
         android:layout_height="24dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="16dp"
         android:adjustViewBounds="false"
         android:background="@drawable/baseline_edit_white_48dp"
         android:scaleType="fitCenter"
         android:src="@drawable/baseline_edit_white_48dp"
         android:tint="@color/colorAccent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/commentCount"
         app:layout_constraintEnd_toEndOf="parent"
         tools:src="@drawable/baseline_edit_white_48dp"
         tools:srcCompat="@drawable/baseline_edit_black_24dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorBackgroundDark"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="0dp" />
 
 </android.support.constraint.ConstraintLayout>
