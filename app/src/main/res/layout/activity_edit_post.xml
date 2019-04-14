@@ -27,14 +27,14 @@
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/toggle"
-        app:layout_constraintEnd_toStartOf="@+id/delete"
+        app:layout_constraintEnd_toStartOf="@+id/deleteAud"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/audioAction"
         app:layout_constraintTop_toBottomOf="@+id/mainText"
         app:srcCompat="@android:drawable/ic_btn_speak_now" />
 
     <ImageButton
-        android:id="@+id/delete"
+        android:id="@+id/deleteAud"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"

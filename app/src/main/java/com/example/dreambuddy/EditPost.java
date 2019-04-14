@@ -1,5 +1,6 @@
 package com.example.dreambuddy;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +19,8 @@ import com.example.dreambuddy.R;
 
 public class EditPost extends AppCompatActivity {
 
+    private static final int DELETE_POST_REQUEST = 1;
+
     JournalEntry post;
     EditText titleEditTextView;
     EditText bodyEditTextView;
@@ -32,10 +35,30 @@ public class EditPost extends AppCompatActivity {
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // Check that it is the SecondActivity with an OK result
+        if (requestCode == DELETE_POST_REQUEST) {
+            if (resultCode == RESULT_OK) {
+
+                // Get String data from Intent
+                if (data.getBooleanExtra("toDelete", false)) {
+                    finish();
+                }
+            }
+        }
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
+
         if (id == R.id.action_exit) {
-            finish();
+
+            Intent intent = new Intent(this, PopUpChecker1.class);
+            startActivityForResult(intent, DELETE_POST_REQUEST);
+
             return true;
         }
 

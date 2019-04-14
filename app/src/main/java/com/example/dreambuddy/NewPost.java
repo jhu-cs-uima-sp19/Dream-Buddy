@@ -14,9 +14,10 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.ToggleButton;
 
 public class NewPost extends AppCompatActivity {
+
+    private static final int DELETE_POST_REQUEST = 1;
 
     ImageButton deleteAud;
 
@@ -30,11 +31,30 @@ public class NewPost extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_exit) {
-            finish();
+
+            Intent intent = new Intent(this, PopUpChecker1.class);
+            startActivityForResult(intent, DELETE_POST_REQUEST);
+
             return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // Check that it is the SecondActivity with an OK result
+        if (requestCode == DELETE_POST_REQUEST) {
+            if (resultCode == RESULT_OK) {
+
+                // Get String data from Intent
+                if (data.getBooleanExtra("toDelete", false)) {
+                    finish();
+                }
+            }
+        }
     }
 
     @Override
@@ -47,7 +67,7 @@ public class NewPost extends AppCompatActivity {
         TextView title = findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
         title.setText(R.string.title_new_post);
 
-        deleteAud = (ImageButton) findViewById(R.id.delete);
+        deleteAud = (ImageButton) findViewById(R.id.deleteAud);
 
         deleteAud.setOnClickListener(new View.OnClickListener() {
             @Override

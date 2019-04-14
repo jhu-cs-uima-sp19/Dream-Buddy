@@ -1,6 +1,7 @@
 package com.example.dreambuddy;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -23,6 +24,11 @@ public class PopUpChecker1 extends Activity {
         btnYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Intent intent = new Intent();
+                intent.putExtra("toDelete", true);
+                setResult(RESULT_OK, intent);
+
                 finish();
             }
         });
@@ -31,6 +37,10 @@ public class PopUpChecker1 extends Activity {
         btnNo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.putExtra("toDelete", false);
+                setResult(RESULT_OK, intent);
+
                 finish();
             }
         });
