@@ -22,3 +22,5 @@ Now try creating a post! You have the option of setting it to public or private.
 On the feed page you can tap on posts to view them. If they are your own posts you can even edit them.
 
 If its your own post, on the edit page, you can choose to delete it with the trash button!
+
+Comments were not in this sprint and neither were likes.
