@@ -1,5 +1,7 @@
 package com.example.dreambuddy;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -49,19 +51,28 @@ public class FeedFragParent extends Fragment{
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference myRef = database.getReference("posts");
 
-        Toast.makeText(getContext(), "Here", Toast.LENGTH_SHORT).show();
+        SharedPreferences preferences = getActivity().getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
+        final String curUsername = preferences.getString("username", "default user");
+
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
                 myDataset.clear();
-                Toast.makeText(getContext(), "Loaded", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), "Loaded", Toast.LENGTH_SHORT).show();
                 for(DataSnapshot d: dataSnapshot.getChildren()) {
                     JournalEntry cur = d.getValue(JournalEntry.class);
-                    if (cur.getIsPrivate() == isPrivate) {
-                        //this is a public post
-                        myDataset.add(cur);
+                    if (cur.getIsPrivate() == isPrivate) { //get posts on to show on public page or private page
+                        if (isPrivate && cur.getUsername().equals(curUsername)) {
+                            //if its private page, this posts belongs to current user
+                            myDataset.add(cur);
+                        }
+                        else if (!isPrivate){
+                            //this is a public post
+                            myDataset.add(cur);
+                        }
+
                     }
                 }
                 Collections.reverse(myDataset);

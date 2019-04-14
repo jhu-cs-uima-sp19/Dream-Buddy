@@ -1,12 +1,17 @@
 package com.example.dreambuddy;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class Profile extends AppCompatActivity {
@@ -70,5 +75,31 @@ public class Profile extends AppCompatActivity {
         title.setText(R.string.title_profile);
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        final EditText publicNameText = this.findViewById(R.id.publicNameText);
+        Context context = getApplicationContext();
+
+        final SharedPreferences preferences = context.getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
+        publicNameText.setText(preferences.getString("username", ""));
+        publicNameText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                //--SAVE Data
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putString("username", publicNameText.getText().toString());
+                editor.commit();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+
+        });
     }
 }
