@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class ViewPost extends AppCompatActivity {
@@ -39,5 +40,17 @@ public class ViewPost extends AppCompatActivity {
         getSupportActionBar().setCustomView(R.layout.action_bar);
         TextView title = findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
         title.setText(R.string.title_view_post);
+
+        TextView post_title = findViewById(R.id.Post_Title);
+        TextView post_user = findViewById(R.id.Post_Creator);
+        TextView comment_count = findViewById(R.id.commentCount);
+        TextView like_count = findViewById(R.id.likesCount);
+        TextView body = findViewById(R.id.Post_Text);
+
+        post_user.setText(this.post.getUsername());
+        post_title.setText(this.post.getTitle());
+        String like_num = "" + this.post.getLikes();
+        like_count.setText(like_num);
+        body.setText(this.post.getBody());
     }
 }
