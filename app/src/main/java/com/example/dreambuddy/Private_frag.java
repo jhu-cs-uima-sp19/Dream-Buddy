@@ -12,11 +12,7 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
-public class Private_frag extends Fragment{
-
-    private RecyclerView recyclerView;
-    private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager layoutManager;
+public class Private_frag extends FeedFragParent{
 
     @Nullable
     @Override
@@ -25,17 +21,7 @@ public class Private_frag extends Fragment{
 
         recyclerView = (RecyclerView) view.findViewById(R.id.private_recycler_view);
 
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
-        recyclerView.setHasFixedSize(true);
-
-        // use a linear layout manager
-        layoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(layoutManager);
-        ArrayList<JournalEntry> myDataset = new ArrayList<JournalEntry>(10);
-        // specify an adapter (see also next example)
-        mAdapter = new MyAdapter(myDataset, this.getContext());
-        recyclerView.setAdapter(mAdapter);
+        setUpRecyclerView(true);
 
         return view;
     }

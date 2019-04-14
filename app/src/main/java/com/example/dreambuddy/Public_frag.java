@@ -25,13 +25,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 
-public class Public_frag extends Fragment{
-
-    private RecyclerView recyclerView;
-    private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager layoutManager;
-    private ArrayList<JournalEntry> myDataset;
-
+public class Public_frag extends FeedFragParent{
 
     @Nullable
     @Override
@@ -40,56 +34,9 @@ public class Public_frag extends Fragment{
 
         recyclerView = (RecyclerView) view.findViewById(R.id.public_recycler_view);
 
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
-        recyclerView.setHasFixedSize(true);
-
-        // use a linear layout manager
-        layoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(layoutManager);
-        myDataset = new ArrayList<JournalEntry>(10);
-        myDataset.add(new JournalEntry("Super cool", "evanmays", "Cool", null, false));
-        myDataset.add(new JournalEntry("Almost cool", "evanmays", "Cool", null, false));
-        myDataset.add(new JournalEntry("not as cool", "evanmays", "Cool", null, false));
-        // specify an adapter (see also next example)
-        mAdapter = new MyAdapter(myDataset, this.getContext());
-        recyclerView.setAdapter(mAdapter);
-
-        startDatabaseListener();
+        setUpRecyclerView(false);
 
         return view;
-    }
-
-    // Read from the database
-    private void startDatabaseListener() {
-        final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        final DatabaseReference myRef = database.getReference("posts");
-
-        Toast.makeText(getContext(), "Here", Toast.LENGTH_SHORT).show();
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                myDataset.clear();
-                Toast.makeText(getContext(), "Loaded", Toast.LENGTH_SHORT).show();
-                for(DataSnapshot d: dataSnapshot.getChildren()) {
-                    JournalEntry cur = d.getValue(JournalEntry.class);
-                    if (!cur.getIsPrivate()) {
-                        //this is a public post
-                        myDataset.add(cur);
-                    }
-                }
-                Collections.reverse(myDataset);
-                mAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w("logTag", "Failed to read value.", error.toException());
-            }
-        });
     }
 }
 
