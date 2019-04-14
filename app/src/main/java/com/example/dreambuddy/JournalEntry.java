@@ -152,4 +152,11 @@ public class JournalEntry implements Serializable {
 
         myRef.child(this.id).setValue(this);
     }
+
+    public void deleteFromFirebase() {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("posts");
+
+        myRef.child(this.id).removeValue();
+    }
 }

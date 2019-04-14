@@ -8,3 +8,11 @@ To learn more about this project, view our [presentation](https://docs.google.co
 
 ### Building and Running
 This project uses [gradle](https://github.com/spring-guides/gs-gradle) as a build system. We recommend using Android Studio and importing as a project.
+
+### Features
+So far this app allows you to share your dreams in text format publicly with other users. You also have the option of setting certain posts to private so that other users can not see these posts.
+
+Our app also includes the ability to change your public name for your posts.
+
+### Getting Started
+When first installing the app, please proceed to the profile pag
