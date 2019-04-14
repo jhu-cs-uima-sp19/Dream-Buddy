@@ -3,6 +3,17 @@
 #### Ongoing documentation of topics discussed and tasks accomplished in our meetings.
 
 ---
+
+#### 3/30/19
+5:30 - 6:00pm
+Brice, Nico, Ani, Evan
+Decided what tasks would go in sprint one and sprint two.
+
+#### 4/2/19
+4:15pm - 4:30pm
+Brice, Nico, Ani, Evan
+Split who is doing what task.
+
 #### 4/5/19
 12:10pm - 12:40pm
 
@@ -16,7 +27,6 @@ Discussion:
 Tasks Accomplished:
 * Set up Firebase
 * Decided on having a view to enter username, no login screen for MVP
-
 
 #### 4/8/19
 5:35pm - 5:45
