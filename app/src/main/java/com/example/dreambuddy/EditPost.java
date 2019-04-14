@@ -3,8 +3,12 @@ package com.example.dreambuddy;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -17,6 +21,7 @@ public class EditPost extends AppCompatActivity {
     EditText titleEditTextView;
     EditText bodyEditTextView;
     Switch togglePublicPrivate;
+    Button saveButton;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -55,5 +60,22 @@ public class EditPost extends AppCompatActivity {
 
         togglePublicPrivate = this.findViewById(R.id.toggle);
         togglePublicPrivate.setChecked(post.getIsPrivate());
+
+        saveButton = this.findViewById(R.id.saveEditPostButton);
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //edit post object
+                post.setTitle(titleEditTextView.getText().toString());
+                post.setBody(bodyEditTextView.getText().toString());
+                post.setIsPrivate(togglePublicPrivate.isChecked());
+
+                //update firebase
+                post.updateToFirebase();
+
+                //close out this view
+                finish();
+            }
+        });
     }
 }

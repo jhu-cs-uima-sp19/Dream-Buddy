@@ -51,13 +51,13 @@
         android:layout_height="40dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/postButton"
+        app:layout_constraintBottom_toTopOf="@+id/saveEditPostButton"
         app:layout_constraintEnd_toStartOf="@+id/privateStatus"
         app:layout_constraintStart_toEndOf="@+id/publicStatus"
         app:layout_constraintTop_toBottomOf="@+id/record" />
 
     <Button
-        android:id="@+id/postButton"
+        android:id="@+id/saveEditPostButton"
         android:layout_width="116dp"
         android:layout_height="68dp"
         android:layout_marginStart="8dp"
