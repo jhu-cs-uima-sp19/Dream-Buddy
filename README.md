@@ -15,4 +15,10 @@ So far this app allows you to share your dreams in text format publicly with oth
 Our app also includes the ability to change your public name for your posts.
 
 ### Getting Started
-When first installing the app, please proceed to the profile pag
+When first installing the app, please proceed to the profile page. Then, enter your public name.
+
+Now try creating a post! You have the option of setting it to public or private. The audio functionality will be added in sprint 2 as planned.
+
+On the feed page you can tap on posts to view them. If they are your own posts you can even edit them.
+
+If its your own post, on the edit page, you can choose to delete it with the trash button!
