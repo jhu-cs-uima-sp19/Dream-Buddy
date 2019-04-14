@@ -34,7 +34,7 @@ public class Private_frag extends Fragment{
         recyclerView.setLayoutManager(layoutManager);
         ArrayList<JournalEntry> myDataset = new ArrayList<JournalEntry>(10);
         // specify an adapter (see also next example)
-        mAdapter = new MyAdapter(myDataset);
+        mAdapter = new MyAdapter(myDataset, this.getContext());
         recyclerView.setAdapter(mAdapter);
 
         return view;

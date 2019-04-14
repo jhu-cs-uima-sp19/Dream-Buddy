@@ -13,6 +13,7 @@
             android:theme="@style/AppTheme.PopUp"
             ></activity>
         <activity android:name=".NewPost" />
+        <activity android:name=".EditPost" />
         <activity android:name=".Profile" />
         <activity android:name=".Waves" />
         <activity android:name=".Learn" />

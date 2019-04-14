@@ -9,29 +9,33 @@
     <TextView
         android:id="@+id/postTitle"
         android:layout_width="0dp"
-        android:layout_height="69dp"
+        android:layout_height="73dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:text="Large Text"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="30sp"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+        app:layout_constraintBottom_toTopOf="@+id/empty_heart"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/likesCount"
-        android:layout_width="38dp"
-        android:layout_height="38dp"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         android:layout_marginStart="12dp"
         android:layout_marginBottom="8dp"
-        android:text="TextView"
+        android:text="0"
+        android:textAlignment="textStart"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/empty_heart" />
 
     <ImageView
         android:id="@+id/empty_heart"
-        android:layout_width="38dp"
-        android:layout_height="38dp"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -40,32 +44,40 @@
 
     <ImageView
         android:id="@+id/comment"
-        android:layout_width="44dp"
-        android:layout_height="38dp"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         android:layout_marginStart="24dp"
         android:layout_marginBottom="8dp"
+        android:tint="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/likesCount"
-        app:srcCompat="@drawable/comment" />
+        app:srcCompat="@drawable/baseline_comment_white_48dp" />
 
     <TextView
         android:id="@+id/commentCount"
-        android:layout_width="38dp"
-        android:layout_height="38dp"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         android:layout_marginStart="12dp"
         android:layout_marginBottom="8dp"
-        android:text="TextView"
+        android:text="0"
+        android:textAlignment="textStart"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/comment" />
 
     <ImageButton
         android:id="@+id/editButton"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:adjustViewBounds="false"
+        android:background="@drawable/baseline_edit_white_48dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/baseline_edit_white_48dp"
+        android:tint="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@android:drawable/ic_menu_edit" />
+        tools:src="@drawable/baseline_edit_white_48dp"
+        tools:srcCompat="@drawable/baseline_edit_black_24dp" />
 
 </android.support.constraint.ConstraintLayout>

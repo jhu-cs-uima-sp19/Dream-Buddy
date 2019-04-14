@@ -52,7 +52,7 @@ public class Public_frag extends Fragment{
         myDataset.add(new JournalEntry("Almost cool", "evanmays", "Cool", null, false));
         myDataset.add(new JournalEntry("not as cool", "evanmays", "Cool", null, false));
         // specify an adapter (see also next example)
-        mAdapter = new MyAdapter(myDataset);
+        mAdapter = new MyAdapter(myDataset, this.getContext());
         recyclerView.setAdapter(mAdapter);
 
         startDatabaseListener();
