@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -22,6 +23,7 @@ public class EditPost extends AppCompatActivity {
     EditText bodyEditTextView;
     Switch togglePublicPrivate;
     Button saveButton;
+    ImageButton deleteButton;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -60,6 +62,15 @@ public class EditPost extends AppCompatActivity {
 
         togglePublicPrivate = this.findViewById(R.id.toggle);
         togglePublicPrivate.setChecked(post.getIsPrivate());
+
+        deleteButton = this.findViewById(R.id.deleteButton);
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                post.deleteFromFirebase();
+                finish();
+            }
+        });
 
         saveButton = this.findViewById(R.id.saveEditPostButton);
         saveButton.setOnClickListener(new View.OnClickListener() {
