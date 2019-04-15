@@ -57,3 +57,17 @@ Discussion:
 
 Tasks Accomplished:
 * Set meeting time for Sunday (1pm)
+
+
+#### 4/15/19
+
+Brice, Nico, Evan, Ani, Muskaan
+
+Discussion:
+* Reflected on Sprint 1, showed Muskaan our results
+* Need to check for invalid titles
+* Pop-up for deleting posts
+
+Tasks Accomplished:
+* Made presentation for tomorrow
+* Implemented scrollable text for viewing posts

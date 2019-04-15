@@ -99,6 +99,7 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
         android:text="Today I dreamt of animals and rainbows and all kinds of amazing things"
+        android:scrollbars = "vertical"
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

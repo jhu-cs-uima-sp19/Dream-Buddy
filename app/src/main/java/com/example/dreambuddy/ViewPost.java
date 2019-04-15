@@ -3,6 +3,7 @@ package com.example.dreambuddy;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageButton;
@@ -46,6 +47,9 @@ public class ViewPost extends AppCompatActivity {
         TextView comment_count = findViewById(R.id.commentCount);
         TextView like_count = findViewById(R.id.likesCount);
         TextView body = findViewById(R.id.Post_Text);
+        body.setMovementMethod(new ScrollingMovementMethod());
+
+
 
         post_user.setText(this.post.getUsername());
         post_title.setText(this.post.getTitle());

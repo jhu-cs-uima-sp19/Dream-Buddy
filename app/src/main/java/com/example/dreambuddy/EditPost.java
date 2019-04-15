@@ -38,11 +38,11 @@ public class EditPost extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        // Check that it is the SecondActivity with an OK result
+        // Check that it's the PopUpChecker activity with an OK result
         if (requestCode == DELETE_POST_REQUEST) {
             if (resultCode == RESULT_OK) {
 
-                // Get String data from Intent
+                // get boolean data from Intent
                 if (data.getBooleanExtra("toDelete", false)) {
                     finish();
                 }
