@@ -129,7 +129,7 @@
         android:singleLine="false"
         android:scrollHorizontally="false"
         android:hint="Enter a description of your dream..."
-        android:inputType="textPersonName"
+        android:inputType="textMultiLine"
         app:layout_constraintBottom_toTopOf="@+id/record"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

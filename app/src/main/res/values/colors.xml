@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6A1B9A</color> <!-- purple -->
+    <color name="colorPrimary">#CF94F6</color> <!-- purple -->
     <color name="colorPrimaryDark">#FFF1FF</color> <!-- light purple -->
     <color name="colorAccent">#81D4FA</color> <!-- blue -->
     <color name="colorBackgroundDark">#515151</color> <!-- gray -->
