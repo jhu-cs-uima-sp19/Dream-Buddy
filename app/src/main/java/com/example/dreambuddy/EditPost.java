@@ -5,10 +5,12 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -83,6 +85,9 @@ public class EditPost extends AppCompatActivity {
         bodyEditTextView = this.findViewById(R.id.mainText);
         bodyEditTextView.setText(post.getBody());
 
+        bodyEditTextView.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        bodyEditTextView.setRawInputType(InputType.TYPE_CLASS_TEXT);
+
         togglePublicPrivate = this.findViewById(R.id.toggle);
         togglePublicPrivate.setChecked(post.getIsPrivate());
 
@@ -99,16 +104,22 @@ public class EditPost extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //edit post object
-                post.setTitle(titleEditTextView.getText().toString());
-                post.setBody(bodyEditTextView.getText().toString());
-                post.setIsPrivate(togglePublicPrivate.isChecked());
 
-                //update firebase
-                post.updateToFirebase();
+                String newTitle = titleEditTextView.getText().toString();
+                String newBody = bodyEditTextView.getText().toString();
 
-                //close out this view
-                finish();
+                if (!newTitle.isEmpty() && !newBody.isEmpty()) {
+                    //edit post object
+                    post.setTitle(newTitle);
+                    post.setBody(newBody);
+                    post.setIsPrivate(togglePublicPrivate.isChecked());
+
+                    //update firebase
+                    post.updateToFirebase();
+
+                    //close out this view
+                    finish();
+                }
             }
         });
     }

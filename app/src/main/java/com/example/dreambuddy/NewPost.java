@@ -6,9 +6,11 @@ import android.content.SharedPreferences;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -79,6 +81,11 @@ public class NewPost extends AppCompatActivity {
 
         final EditText titleEditTextView = this.findViewById(R.id.editPostTitle);
         final EditText bodyEditTextView = this.findViewById(R.id.mainText);
+
+        bodyEditTextView.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        bodyEditTextView.setRawInputType(InputType.TYPE_CLASS_TEXT);
+
+
         final Switch togglePublicPrivate = this.findViewById(R.id.toggle);
         SharedPreferences preferences = getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
         final String curUsername = preferences.getString("username", "default user");
@@ -89,14 +96,18 @@ public class NewPost extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                String title = titleEditTextView.getText().toString();
+                String body = bodyEditTextView.getText().toString();
 
-                JournalEntry post = new JournalEntry(titleEditTextView.getText().toString(), curUsername, bodyEditTextView.getText().toString(), null, togglePublicPrivate.isChecked());
+                if (!title.isEmpty() && !body.isEmpty()) {
+                    JournalEntry post = new JournalEntry(title, curUsername, body, null, togglePublicPrivate.isChecked());
 
-                //update firebase
-                post.createToFirebase();
+                    //update firebase
+                    post.createToFirebase();
 
-                //close out this view
-                finish();
+                    //close out this view
+                    finish();
+                }
             }
         });
     }
