@@ -71,3 +71,25 @@ Discussion:
 Tasks Accomplished:
 * Made presentation for tomorrow
 * Implemented scrollable text for viewing posts
+
+
+#### 4/21/19
+
+Brice, Evan, Nico, Ani
+
+Discussion:
+* Decided tasks for next Sprint
+* Talk about supporting different APIs
+* Reflection on presentation
+
+Tasks Accomplished:
+* Split up tasks between us for the Sprint
+* Made four columns in Github product backlog
+
+#### 4/22/19
+
+Brice, Evan, Ani, Muskaan
+
+Discussion:
+* Talked about goals for next Sprint w/ Muskaan
+* Went over things that we may not get to for this sprint
