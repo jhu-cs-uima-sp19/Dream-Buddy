@@ -2,12 +2,20 @@ package com.example.dreambuddy;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class Waves extends AppCompatActivity {
 
@@ -62,13 +70,28 @@ public class Waves extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_waves);
-
+        setContentView(R.layout.activity_waves);;
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.action_bar);
         TextView title = findViewById(getResources().getIdentifier("action_bar_title", "id", getPackageName()));
         title.setText(R.string.title_waves);
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        ArrayList<AudioFile> audioList = new ArrayList<AudioFile>();
+        AudioFile T1 = new AudioFile("Track1");
+        audioList.add(T1);
+        AudioFile T2 = new AudioFile("Track2");
+        audioList.add(T2);
+        AudioFile T3 = new AudioFile("Track3");
+        audioList.add(T3);
+        AudioFile T4 = new AudioFile("Track4");
+        audioList.add(T4);
+
+        RecyclerView recyclerView = findViewById(R.id.audio_recycler_view);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        AudioAdapter adapter = new AudioAdapter(audioList, this);
+        recyclerView.setAdapter(adapter);
     }
 }
