@@ -62,17 +62,19 @@ public class FeedFragParent extends Fragment{
                 myDataset.clear();
                 //Toast.makeText(getContext(), "Loaded", Toast.LENGTH_SHORT).show();
                 for(DataSnapshot d: dataSnapshot.getChildren()) {
-                    JournalEntry cur = d.getValue(JournalEntry.class);
-                    if (cur.getIsPrivate() == isPrivate) { //get posts on to show on public page or private page
-                        if (isPrivate && cur.getUsername().equals(curUsername)) {
-                            //if its private page, this posts belongs to current user
-                            myDataset.add(cur);
+                    JournalEntry curPost = d.getValue(JournalEntry.class);
+                    if (isPrivate) {
+                        //we are on private feed
+                        //show ALL posts belonging to this user
+                        if (curPost.getUsername().equals(curUsername)) {
+                            myDataset.add(curPost);
                         }
-                        else if (!isPrivate){
-                            //this is a public post
-                            myDataset.add(cur);
+                    }
+                    else {
+                        //we are on public feed
+                        if (curPost.getIsPrivate() == false) {
+                            myDataset.add(curPost);
                         }
-
                     }
                 }
                 Collections.reverse(myDataset);
