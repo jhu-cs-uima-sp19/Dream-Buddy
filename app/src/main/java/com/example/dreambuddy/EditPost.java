@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.dreambuddy.R;
 
@@ -119,6 +120,10 @@ public class EditPost extends AppCompatActivity {
 
                     //close out this view
                     finish();
+                }
+                else {
+                    final String ErrorMsg = "Post title and body are required please!";
+                    Toast.makeText(getApplicationContext(),ErrorMsg,Toast.LENGTH_LONG).show();
                 }
             }
         });
