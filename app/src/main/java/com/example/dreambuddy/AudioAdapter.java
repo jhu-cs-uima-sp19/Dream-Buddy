@@ -19,6 +19,8 @@ public class AudioAdapter extends RecyclerView.Adapter<AudioAdapter.MyViewHolder
     private MediaPlayer mp;
     private boolean playing;
     private int trackPlaying;
+    private int duration;
+    private int current;
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
@@ -33,10 +35,15 @@ public class AudioAdapter extends RecyclerView.Adapter<AudioAdapter.MyViewHolder
     }
 
     public AudioAdapter(ArrayList<AudioFile> myDataset, Context context) {
+
+        final SharedPreferences preferences = context.getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
         this.mDataset = myDataset;
         this.context = context;
         this.playing = false;
         this.trackPlaying = 0;
+        this.current = 0;
+        this.duration = preferences.getInt("sound_wave_duration", 2);
     }
 
     @Override
@@ -57,29 +64,34 @@ public class AudioAdapter extends RecyclerView.Adapter<AudioAdapter.MyViewHolder
         holder.play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 String temp = curEntry.getTitle();
                 if (!playing) {
                     if (temp.equals("Track1")) {
                         mp = MediaPlayer.create(context, R.raw.track1);
                         mp.start();
+                        mp.setLooping(true);
                         holder.play.setImageResource(R.drawable.ic_pause_black_24dp);
                         playing = true;
                         trackPlaying = 1;
                     } else if (temp.equals("Track2")) {
                         mp = MediaPlayer.create(context, R.raw.track2);
                         mp.start();
+                        mp.setLooping(true);
                         holder.play.setImageResource(R.drawable.ic_pause_black_24dp);
                         playing = true;
                         trackPlaying = 2;
                     } else if (temp.equals("Track3")) {
                         mp = MediaPlayer.create(context, R.raw.track3);
                         mp.start();
+                        mp.setLooping(true);
                         holder.play.setImageResource(R.drawable.ic_pause_black_24dp);
                         playing = true;
                         trackPlaying = 3;
                     } else if (temp.equals("Track4")) {
                         mp = MediaPlayer.create(context, R.raw.track4);
                         mp.start();
+                        mp.setLooping(true);
                         holder.play.setImageResource(R.drawable.ic_pause_black_24dp);
                         playing = true;
                         trackPlaying = 4;
