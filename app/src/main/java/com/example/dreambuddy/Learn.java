@@ -6,6 +6,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.webkit.WebView;
@@ -75,17 +76,21 @@ public class Learn extends AppCompatActivity {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         ArrayList<WebSite> siteList = new ArrayList<WebSite>();
-        WebSite W1 = new WebSite("https://www.reddit.com/r/LucidDreaming/comments/trz9z/beginners_wild_method_adjustments_tricks_and_tips/", "WBTB", "Wake Back to Bed Method");
+        WebSite W1 = new WebSite("https://www.reddit.com/r/LucidDreaming/comments/28x5fj/how_to_wbtb/", "WBTB", "Wake Back to Bed Method");
         siteList.add(W1);
-        WebSite W2 = new WebSite("https://www.reddit.com/r/LucidDreaming/comments/trz9z/beginners_wild_method_adjustments_tricks_and_tips/", "MILD", "Wake Back to Bed Method");
+        WebSite W2 = new WebSite("https://www.reddit.com/r/LucidDreaming/comments/3fqfz9/mild_tips/", "MILD", "Mnemonically Induced Lucid Dream Method");
         siteList.add(W2);
-        WebSite W3 = new WebSite("https://www.reddit.com/r/LucidDreaming/comments/trz9z/beginners_wild_method_adjustments_tricks_and_tips/", "WILD", "Wake Back to Bed Method");
+        WebSite W3 = new WebSite("https://www.reddit.com/r/LucidDreaming/comments/trz9z/beginners_wild_method_adjustments_tricks_and_tips/", "WILD", "Wake-Induced Lucid Dream Method");
         siteList.add(W3);
-        WebSite W4 = new WebSite("https://www.reddit.com/r/LucidDreaming/comments/trz9z/beginners_wild_method_adjustments_tricks_and_tips/", "FILD", "Wake Back to Bed Method");
+        WebSite W4 = new WebSite("https://www.reddit.com/r/LucidDreaming/comments/1dn2y8/detailed_tutorial_on_how_to_perform_the_fild/", "FILD", "Finger-Induced Lucid Dream Method");
         siteList.add(W4);
-        WebSite W5 = new WebSite("https://www.reddit.com/r/LucidDreaming/comments/trz9z/beginners_wild_method_adjustments_tricks_and_tips/", "SILD", "Wake Back to Bed Method");
+        WebSite W5 = new WebSite("https://www.reddit.com/r/LucidDreaming/comments/tnzmc/beginners_vild_visually_incubated_lucid_dream/", "VILD", "Visually Incubated Lucid Dream Method");
         siteList.add(W5);
 
         RecyclerView recyclerView = findViewById(R.id.learn_recycler_view);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        WebAdapter adapter = new WebAdapter(siteList, this);
+        recyclerView.setAdapter(adapter);
     }
 }

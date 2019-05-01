@@ -1,6 +1,7 @@
 package com.example.dreambuddy;
 
 public class WebSite {
+
     private String url;
 
     private String acronym;
