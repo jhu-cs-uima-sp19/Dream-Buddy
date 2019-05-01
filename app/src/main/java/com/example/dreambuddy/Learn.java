@@ -6,8 +6,12 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
+import android.webkit.WebView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class Learn extends AppCompatActivity {
 
@@ -70,6 +74,18 @@ public class Learn extends AppCompatActivity {
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
+        ArrayList<WebSite> siteList = new ArrayList<WebSite>();
+        WebSite W1 = new WebSite("https://www.reddit.com/r/LucidDreaming/comments/trz9z/beginners_wild_method_adjustments_tricks_and_tips/", "WBTB", "Wake Back to Bed Method");
+        siteList.add(W1);
+        WebSite W2 = new WebSite("https://www.reddit.com/r/LucidDreaming/comments/trz9z/beginners_wild_method_adjustments_tricks_and_tips/", "MILD", "Wake Back to Bed Method");
+        siteList.add(W2);
+        WebSite W3 = new WebSite("https://www.reddit.com/r/LucidDreaming/comments/trz9z/beginners_wild_method_adjustments_tricks_and_tips/", "WILD", "Wake Back to Bed Method");
+        siteList.add(W3);
+        WebSite W4 = new WebSite("https://www.reddit.com/r/LucidDreaming/comments/trz9z/beginners_wild_method_adjustments_tricks_and_tips/", "FILD", "Wake Back to Bed Method");
+        siteList.add(W4);
+        WebSite W5 = new WebSite("https://www.reddit.com/r/LucidDreaming/comments/trz9z/beginners_wild_method_adjustments_tricks_and_tips/", "SILD", "Wake Back to Bed Method");
+        siteList.add(W5);
 
+        RecyclerView recyclerView = findViewById(R.id.learn_recycler_view);
     }
 }
