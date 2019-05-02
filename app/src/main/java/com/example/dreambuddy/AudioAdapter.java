@@ -16,11 +16,11 @@ import java.util.ArrayList;
 public class AudioAdapter extends RecyclerView.Adapter<AudioAdapter.MyViewHolder> {
     private ArrayList<AudioFile> mDataset;
     private Context context;
-    private MediaPlayer mp;
-    private boolean playing;
+    static public boolean playing;
     private int trackPlaying;
     private int duration;
     private int current;
+    static public MediaPlayer mp;
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
@@ -126,6 +126,7 @@ public class AudioAdapter extends RecyclerView.Adapter<AudioAdapter.MyViewHolder
             }
         });
     }
+
 
     @Override
     public int getItemCount() {

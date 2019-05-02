@@ -11,13 +11,19 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class Profile extends AppCompatActivity {
+
+    Spinner spinner;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -111,5 +117,47 @@ public class Profile extends AppCompatActivity {
             }
 
         });
+
+        spinner = findViewById(R.id.spinner);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+            R.array.durations_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        int dur = preferences.getInt("sound_wave_duration", 2);
+        spinner.setSelection(dur/2 - 1);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String selected = parent.getItemAtPosition(position).toString();
+                if (selected.equals("8:00")) {
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putInt("sound_wave_duration", 8);
+                    spinner.setSelection(3);
+                    editor.commit();
+                } else if (selected.equals("6:00")) {
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putInt("sound_wave_duration", 6);
+                    spinner.setSelection(2);
+                    editor.commit();
+                } else if (selected.equals("4:00")) {
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putInt("sound_wave_duration", 4);
+                    spinner.setSelection(1);
+                    editor.commit();
+                } else if (selected.equals("2:00")) {
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putInt("sound_wave_duration", 2);
+                    spinner.setSelection(0);
+                    editor.commit();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
     }
 }
