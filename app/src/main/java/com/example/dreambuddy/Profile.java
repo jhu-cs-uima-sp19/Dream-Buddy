@@ -14,6 +14,9 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class Profile extends AppCompatActivity {
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -91,8 +94,15 @@ public class Profile extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 //--SAVE Data
                 SharedPreferences.Editor editor = preferences.edit();
-                editor.putString("username", publicNameText.getText().toString());
-                editor.commit();
+                String new_name = publicNameText.getText().toString();
+                editor.putString("username", new_name);
+                editor.apply();
+
+                final FirebaseDatabase database = FirebaseDatabase.getInstance();
+                final DatabaseReference myRef = database.getReference("users");
+
+                myRef.child(preferences.getString("user_id", "default user")).child("username").setValue(new_name);
+
             }
 
             @Override

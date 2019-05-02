@@ -8,7 +8,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * This class is used to facilitate working with data for a journal post.
@@ -27,6 +29,9 @@ public class JournalEntry implements Serializable {
     /** The username of the author. */
     private String username;
 
+    /** The user_id of the author. */
+    private String author_id;
+
     /** The number of likes given to the post. */
     private int likes;
 
@@ -34,7 +39,10 @@ public class JournalEntry implements Serializable {
     private MediaPlayer audioContent;
 
     /** A list of comments given to the post. */
-    private List<Comment> comments;
+    private Map<String, Comment> comments;
+
+    /** A list of user ids who liked the post. */
+    private Map<String, String> liked_by_whom;
 
     /** Whether the post is private or public. */
     private boolean isPrivate;
@@ -47,15 +55,17 @@ public class JournalEntry implements Serializable {
         this.title = "";
         this.body = "";
         this.likes = 0;
-        comments = new ArrayList<>();
+        comments = new HashMap<>();
+        liked_by_whom = new HashMap<>();
         //id is set when we save to firebase for the first time
     }
 
-    public JournalEntry(String title, String username, String body, MediaPlayer audioContent, boolean isPrivate) {
+    public JournalEntry(String title, String username, String author_id, String body, MediaPlayer audioContent, boolean isPrivate) {
         this();
         this.title = title;
         this.body = body;
         this.username = username;
+        this.author_id = author_id;
         this.audioContent = audioContent;
         this.isPrivate = isPrivate;
     }
@@ -66,6 +76,10 @@ public class JournalEntry implements Serializable {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public String getAuthor_id() {
+        return author_id;
     }
 
     public String getTitle() {
@@ -110,22 +124,43 @@ public class JournalEntry implements Serializable {
         this.audioContent = audioContent;
     }
 
-    public List<Comment> getComments() {
+    public Map<String, Comment> getComments() {
         return comments;
     }
 
-    public void setComments(List<Comment> comments) {
+    public void setComments(Map<String, Comment> comments) {
         this.comments = comments;
     }
 
-    public void addComment(Comment comment) {
-        this.comments.add(comment);
+    public boolean liked_by_user(String user_id) {
+        return liked_by_whom.containsKey(user_id);
+    }
+
+    public void addUserLike(String user_id) {
+        this.liked_by_whom.put(user_id, "1");
+    }
+
+    public void removeUserLike(String user_id) {
+        this.liked_by_whom.remove(user_id);
+    }
+
+    public void addComment(String user_id, Comment comment) {
+        this.comments.put(user_id, comment);
     }
 
     public Comment deleteComment(Comment comment) {
         this.comments.remove(comment);
         return comment;
     }
+
+    public Map<String, String> getLiked_by_whom() {
+        return liked_by_whom;
+    }
+
+    public void setLiked_by_whom(Map<String, String> liked_by_whom) {
+        this.liked_by_whom = liked_by_whom;
+    }
+
 
     public boolean getIsPrivate() {
         return isPrivate;

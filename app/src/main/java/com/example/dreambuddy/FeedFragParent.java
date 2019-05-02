@@ -52,7 +52,7 @@ public class FeedFragParent extends Fragment{
         final DatabaseReference myRef = database.getReference("posts");
 
         SharedPreferences preferences = getActivity().getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
-        final String curUsername = preferences.getString("username", "default user");
+        final String curUser_id = preferences.getString("user_id", "default user");
 
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -66,13 +66,13 @@ public class FeedFragParent extends Fragment{
                     if (isPrivate) {
                         //we are on private feed
                         //show ALL posts belonging to this user
-                        if (curPost.getUsername().equals(curUsername)) {
+                        if (curPost.getAuthor_id().equals(curUser_id)) {
                             myDataset.add(curPost);
                         }
                     }
                     else {
                         //we are on public feed
-                        if (curPost.getIsPrivate() == false) {
+                        if (!curPost.getIsPrivate()) {
                             myDataset.add(curPost);
                         }
                     }

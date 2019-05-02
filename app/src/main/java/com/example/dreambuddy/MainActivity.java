@@ -1,6 +1,8 @@
 package com.example.dreambuddy;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -86,6 +88,18 @@ public class MainActivity extends AppCompatActivity {
         TabLayout tl = findViewById(R.id.tabs);
         tl.setupWithViewPager(vp);
 
+        Context context = getApplicationContext();
+        SharedPreferences preferences = context.getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
+
+        if (preferences.getBoolean("first_launch", true)) {
+            //the app is being launched for first time, do something
+            User new_user = new User(preferences.getString("username", "default user"));
+            new_user.createToFirebase();
+            preferences.edit().putString("user_id", new_user.getUser_id()).apply();
+
+            // record the fact that the app has been started at least once
+            preferences.edit().putBoolean("first_launch", false).apply();
+        }
     }
 
 }

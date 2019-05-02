@@ -90,6 +90,8 @@ public class NewPost extends AppCompatActivity {
         final Switch togglePublicPrivate = this.findViewById(R.id.toggle);
         SharedPreferences preferences = getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
         final String curUsername = preferences.getString("username", "default user");
+        final String curUserID = preferences.getString("user_id", "default user");
+
 
 
         Button postButton = this.findViewById(R.id.saveEditPostButton);
@@ -101,7 +103,7 @@ public class NewPost extends AppCompatActivity {
                 String body = bodyEditTextView.getText().toString();
 
                 if (!title.isEmpty() && !body.isEmpty()) {
-                    JournalEntry post = new JournalEntry(title, curUsername, body, null, togglePublicPrivate.isChecked());
+                    JournalEntry post = new JournalEntry(title, curUsername, curUserID, body, null, togglePublicPrivate.isChecked());
 
                     //update firebase
                     post.createToFirebase();
