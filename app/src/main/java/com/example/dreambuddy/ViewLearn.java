@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -34,6 +35,10 @@ public class ViewLearn extends AppCompatActivity {
 
         webView = (WebView) findViewById(R.id.webview);
         webView.setWebViewClient(new WebViewClient());
-        webView.loadUrl("https://www.reddit.com/r/LucidDreaming/comments/trz9z/beginners_wild_method_adjustments_tricks_and_tips/");
+        String url = getIntent().getExtras().getString("url");
+        webView.loadUrl(url);
+
+        WebSettings websettings = webView.getSettings();
+        websettings.setJavaScriptEnabled(true);
     }
 }

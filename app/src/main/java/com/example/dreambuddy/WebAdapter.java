@@ -54,7 +54,7 @@ public class WebAdapter extends RecyclerView.Adapter<WebAdapter.MyViewHolder> {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, ViewLearn.class);
-                //intent.putExtra("journalEntry", curEntry);
+                intent.putExtra("url", curEntry.getUrl());
                 context.startActivity(intent);
             }
         });
