@@ -18,12 +18,16 @@ public class Comment implements Serializable {
     /** Username of author. */
     private String username;
 
-    public Comment(String body, String username) {
+    /** Unique user ID of the author. */
+    private String author_id;
+
+    public Comment(String body, String username, String author_id) {
         String pattern = "MMMMM dd, yyyy";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         this.date = simpleDateFormat.format(new Date());
         this.body = body;
         this.username = username;
+        this.author_id = author_id;
     }
 
     public Comment() {
@@ -54,6 +58,14 @@ public class Comment implements Serializable {
 
     public String getUsername() {
         return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getAuthor_id() {
+        return author_id;
     }
 
     @Override

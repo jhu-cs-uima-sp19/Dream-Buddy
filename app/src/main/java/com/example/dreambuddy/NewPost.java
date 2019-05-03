@@ -18,6 +18,9 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class NewPost extends AppCompatActivity {
 
     private static final int DELETE_POST_REQUEST = 1;
@@ -88,7 +91,7 @@ public class NewPost extends AppCompatActivity {
 
 
         final Switch togglePublicPrivate = this.findViewById(R.id.toggle);
-        SharedPreferences preferences = getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
+        final SharedPreferences preferences = getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
         final String curUsername = preferences.getString("username", "default user");
         final String curUserID = preferences.getString("user_id", "default user");
 
@@ -107,6 +110,12 @@ public class NewPost extends AppCompatActivity {
 
                     //update firebase
                     post.createToFirebase();
+
+                    final FirebaseDatabase database = FirebaseDatabase.getInstance();
+                    final DatabaseReference cur_user = database.getReference("users");
+
+                    final String uid = preferences.getString("user_id", "default user");
+                    cur_user.child(uid).child("owned_posts").push().setValue(post.getId());
 
                     //close out this view
                     finish();

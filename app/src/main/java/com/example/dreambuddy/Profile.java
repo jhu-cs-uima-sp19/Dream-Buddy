@@ -10,8 +10,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -93,53 +96,31 @@ public class Profile extends AppCompatActivity {
 
         final SharedPreferences preferences = context.getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
         publicNameText.setText(preferences.getString("username", ""));
-        publicNameText.addTextChangedListener(new TextWatcher() {
+        publicNameText.setOnEditorActionListener(new EditText.OnEditorActionListener() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                boolean handled = false;
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    SharedPreferences.Editor editor = preferences.edit();
+                    final String new_name = publicNameText.getText().toString();
+                    editor.putString("username", new_name);
+                    editor.apply();
 
+                    final FirebaseDatabase database = FirebaseDatabase.getInstance();
+                    final DatabaseReference cur_user = database.getReference("users");
+
+                    final String uid = preferences.getString("user_id", "default user");
+                    cur_user.child(uid).child("username").setValue(new_name);
+
+                    updatePosts(new_name, database, uid);
+
+                    InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+
+                    handled = true;
+                }
+                return handled;
             }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                //--SAVE Data
-                SharedPreferences.Editor editor = preferences.edit();
-                final String new_name = publicNameText.getText().toString();
-                editor.putString("username", new_name);
-                editor.apply();
-
-                final FirebaseDatabase database = FirebaseDatabase.getInstance();
-                final DatabaseReference cur_user = database.getReference("users");
-
-                final String uid = preferences.getString("user_id", "default user");
-                cur_user.child(uid).child("username").setValue(new_name);
-
-                final DatabaseReference posts = database.getReference("posts");
-
-                posts.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-
-                        for (DataSnapshot d : dataSnapshot.getChildren()) {
-                            JournalEntry post = d.getValue(JournalEntry.class);
-                            if (post.getAuthor_id().equals(uid)) {
-                                post.setUsername(new_name);
-                                post.updateToFirebase();
-                            }
-                        }
-                    }
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
-
-            }
-
         });
 
         spinner = findViewById(R.id.spinner);
@@ -184,4 +165,32 @@ public class Profile extends AppCompatActivity {
         });
 
     }
+
+    /**
+     * Updates all of the users posts with their new name.
+     * @param new_name the new name
+     * @param database the database
+     * @param uid the user's unique ID
+     */
+    private void updatePosts(final String new_name, FirebaseDatabase database, final String uid) {
+        final DatabaseReference posts = database.getReference("posts");
+        posts.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot d : dataSnapshot.getChildren()) {
+                    JournalEntry post = d.getValue(JournalEntry.class);
+                    if (post.getAuthor_id().equals(uid)) {
+                        post.setUsername(new_name);
+                        post.updateToFirebase();
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
 }

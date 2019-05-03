@@ -26,6 +26,9 @@ public class User implements Serializable {
     /** Posts liked by the user. */
     private List<String> liked_posts;
 
+    /** Posts made by the user. */
+    private List<String> owned_posts;
+
     private User() {
         this.liked_posts = new ArrayList<>();
     }
@@ -51,7 +54,7 @@ public class User implements Serializable {
         this.user_id = user_id;
     }
 
-    public List getLiked_posts() {
+    public List<String> getLiked_posts() {
         return liked_posts;
     }
 
@@ -69,6 +72,26 @@ public class User implements Serializable {
 
     public boolean likedPost(String post_id) {
         return liked_posts.contains(post_id);
+    }
+
+    public List<String> getOwned_posts() {
+        return owned_posts;
+    }
+
+    public void setOwned_posts(List liked_posts) {
+        this.owned_posts = owned_posts;
+    }
+
+    public void addToOwnedPosts(String post_id) {
+        this.owned_posts.add(post_id);
+    }
+
+    public void removeFromOwnedPosts(String post_id) {
+        this.owned_posts.remove(post_id);
+    }
+
+    public boolean ownsPost(String post_id) {
+        return owned_posts.contains(post_id);
     }
 
     public void createToFirebase() {

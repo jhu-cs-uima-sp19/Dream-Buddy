@@ -40,10 +40,10 @@ public class JournalEntry implements Serializable {
     private MediaPlayer audioContent;
 
     /** A list of comments given to the post. */
-    private Map<String, Comment> comments;
+    private List<Comment> comments;
 
     /** A list of user ids who liked the post. */
-    private Map<String, String> liked_by_whom;
+    private List<String> liked_by_whom;
 
     /** Whether the post is private or public. */
     private boolean isPrivate;
@@ -60,8 +60,8 @@ public class JournalEntry implements Serializable {
         this.title = "";
         this.body = "";
         this.likes = 0;
-        comments = new HashMap<>();
-        liked_by_whom = new HashMap<>();
+        comments = new ArrayList<>();
+        liked_by_whom = new ArrayList<>();
         //id is set when we save to firebase for the first time
     }
 
@@ -138,28 +138,28 @@ public class JournalEntry implements Serializable {
         this.audioContent = audioContent;
     }
 
-    public Map<String, Comment> getComments() {
+    public List<Comment> getComments() {
         return comments;
     }
 
-    public void setComments(Map<String, Comment> comments) {
+    public void setComments(List<Comment> comments) {
         this.comments = comments;
     }
 
     public boolean liked_by_user(String user_id) {
-        return liked_by_whom.containsKey(user_id);
+        return liked_by_whom.contains(user_id);
     }
 
     public void addUserLike(String user_id) {
-        this.liked_by_whom.put(user_id, "1");
+        this.liked_by_whom.add(user_id);
     }
 
     public void removeUserLike(String user_id) {
         this.liked_by_whom.remove(user_id);
     }
 
-    public void addComment(String user_id, Comment comment) {
-        this.comments.put(user_id, comment);
+    public void addComment(Comment comment) {
+        this.comments.add(comment);
     }
 
     public Comment deleteComment(Comment comment) {
@@ -167,11 +167,11 @@ public class JournalEntry implements Serializable {
         return comment;
     }
 
-    public Map<String, String> getLiked_by_whom() {
+    public List<String> getLiked_by_whom() {
         return liked_by_whom;
     }
 
-    public void setLiked_by_whom(Map<String, String> liked_by_whom) {
+    public void setLiked_by_whom(List<String> liked_by_whom) {
         this.liked_by_whom = liked_by_whom;
     }
 
