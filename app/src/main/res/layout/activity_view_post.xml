@@ -33,14 +33,14 @@
         android:id="@+id/Post_Play_Button"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="24dp"
         android:background="@drawable/ic_play_arrow_black_24dp"
         android:scaleType="fitCenter"
-        android:src="@drawable/ic_play_arrow_black_24dp"
         android:tint="@color/colorAccent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_play_arrow_black_24dp" />
 
     <View
         android:id="@+id/view"
@@ -70,6 +70,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Post_Creator"
         app:srcCompat="@drawable/empty_heart" />
+
+    <ImageView
+        android:id="@+id/filled_heart"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Post_Creator"
+        app:srcCompat="@drawable/filled_heart" />
 
     <ImageView
         android:id="@+id/comment"
@@ -105,5 +115,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view"
         android:textColor="@color/colorBackgroundDark"/>
+
+    <TextView
+        android:id="@+id/Date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="May 3, 2019"
+        app:layout_constraintStart_toEndOf="@+id/Post_Creator"
+        app:layout_constraintTop_toBottomOf="@+id/Post_Title" />
+
+    <Button
+        android:id="@+id/like_area"
+        android:layout_width="76dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="20dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Post_Title" />
 
 </android.support.constraint.ConstraintLayout>

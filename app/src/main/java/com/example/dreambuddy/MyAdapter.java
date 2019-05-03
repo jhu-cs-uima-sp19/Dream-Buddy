@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -37,14 +38,16 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         public ImageButton editImageButton;
         public AppCompatImageView empty_heart;
         public AppCompatImageView filled_heart;
+        public Button like_area;
 
         public MyViewHolder(View v) {
             super(v);
             titleTextView = v.findViewById(R.id.postTitle);
             likesTextView = v.findViewById(R.id.likesCount);
             editImageButton = v.findViewById(R.id.editButton);
-            empty_heart = v.findViewById(R.id.empty_heart);
+            like_area = v.findViewById(R.id.like_area);
             filled_heart = v.findViewById(R.id.filled_heart);
+            empty_heart = v.findViewById(R.id.empty_heart);
 
         }
     }
@@ -112,7 +115,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             holder.filled_heart.setVisibility(View.VISIBLE);
             holder.empty_heart.setVisibility(View.INVISIBLE);
 
-            holder.filled_heart.setOnClickListener(new View.OnClickListener() {
+            holder.like_area.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     curEntry.removeUserLike(curUser_id);
@@ -124,7 +127,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             holder.empty_heart.setVisibility(View.VISIBLE);
             holder.filled_heart.setVisibility(View.INVISIBLE);
 
-            holder.empty_heart.setOnClickListener(new View.OnClickListener() {
+            holder.like_area.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     curEntry.addUserLike(curUser_id);

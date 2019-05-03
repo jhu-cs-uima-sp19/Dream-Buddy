@@ -51,8 +51,10 @@ public class JournalEntry implements Serializable {
     /** Internal ID code of the journal post. */
     private String id;
 
+    /** Pattern to use to format dates. */
+    private static String pattern = "MM/dd/yyyy";
+
     private JournalEntry() {
-        String pattern = "MMMMM dd, yyyy";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         this.date = simpleDateFormat.format(new Date());
         this.title = "";
@@ -82,7 +84,6 @@ public class JournalEntry implements Serializable {
     }
 
     public void updateDate() {
-        String pattern = "MMMMM dd, yyyy";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         this.date = simpleDateFormat.format(new Date());
     }

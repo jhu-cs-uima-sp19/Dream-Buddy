@@ -101,6 +101,11 @@ public class Profile extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
                 //--SAVE Data
                 SharedPreferences.Editor editor = preferences.edit();
                 final String new_name = publicNameText.getText().toString();
@@ -132,10 +137,6 @@ public class Profile extends AppCompatActivity {
 
                     }
                 });
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
 
             }
 
