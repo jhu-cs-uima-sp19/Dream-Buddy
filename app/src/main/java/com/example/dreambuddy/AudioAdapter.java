@@ -23,7 +23,9 @@ public class AudioAdapter extends RecyclerView.Adapter<AudioAdapter.MyViewHolder
     static public MediaPlayer mp;
 
     public void pauseAudio() {
-        mp.release();
+        if (mp != null) {
+            mp.release();
+        }
     }
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
