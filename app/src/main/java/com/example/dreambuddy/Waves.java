@@ -19,6 +19,8 @@ import java.util.ArrayList;
 
 public class Waves extends AppCompatActivity {
 
+    private AudioAdapter adapter;
+
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -91,7 +93,13 @@ public class Waves extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.audio_recycler_view);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        AudioAdapter adapter = new AudioAdapter(audioList, this);
+        adapter = new AudioAdapter(audioList, this);
         recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        adapter.pauseAudio();
     }
 }
