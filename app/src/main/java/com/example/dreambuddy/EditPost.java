@@ -93,11 +93,13 @@ public class EditPost extends AppCompatActivity {
         togglePublicPrivate.setChecked(post.getIsPrivate());
 
         deleteButton = this.findViewById(R.id.deleteButton);
+        final EditPost this_ = this;
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(this_, PopUpChecker1.class);
+                startActivityForResult(intent, DELETE_POST_REQUEST);
                 post.deleteFromFirebase();
-                finish();
             }
         });
 
