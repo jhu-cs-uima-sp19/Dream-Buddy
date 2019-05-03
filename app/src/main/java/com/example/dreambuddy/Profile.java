@@ -25,6 +25,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 public class Profile extends AppCompatActivity {
@@ -112,10 +113,10 @@ public class Profile extends AppCompatActivity {
                     final String uid = preferences.getString("user_id", "default user");
                     cur_user.child(uid).child("username").setValue(new_name);
 
-                    updatePosts(new_name, database, uid);
-
                     InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+
+                    updatePosts(new_name, database, uid);
 
                     handled = true;
                 }
@@ -172,20 +173,20 @@ public class Profile extends AppCompatActivity {
      * @param database the database
      * @param uid the user's unique ID
      */
-    private void updatePosts(final String new_name, FirebaseDatabase database, final String uid) {
-        final DatabaseReference posts = database.getReference("posts");
-        posts.addValueEventListener(new ValueEventListener() {
+    private void updatePosts(final String new_name, final FirebaseDatabase database, final String uid) {
+        final DatabaseReference db = database.getReference();
+
+        Query owned_posts = db.child("users").child(uid).child("owned_posts");
+
+        owned_posts.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
                 for (DataSnapshot d : dataSnapshot.getChildren()) {
-                    JournalEntry post = d.getValue(JournalEntry.class);
-                    if (post.getAuthor_id().equals(uid)) {
-                        post.setUsername(new_name);
-                        post.updateToFirebase();
-                    }
+                    String post_id = (String) d.getValue();
+                    db.child("posts").child(post_id).child("username").setValue(new_name);
                 }
             }
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
