@@ -1,14 +1,16 @@
 package com.example.dreambuddy;
 
+import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
  * This class stores data about singular comments given to posts.
  */
-public class Comment {
+public class Comment implements Serializable {
 
     /** Date of creation/last edit date. */
-    private Date date;
+    private String date;
 
     /** The body of the comment. */
     private String body;
@@ -17,7 +19,9 @@ public class Comment {
     private String username;
 
     public Comment(String body, String username) {
-        this.date = new Date();
+        String pattern = "MMMMM dd, yyyy";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        this.date = simpleDateFormat.format(new Date());
         this.body = body;
         this.username = username;
     }
@@ -26,12 +30,18 @@ public class Comment {
 
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
+    }
+
+    public void updateDate() {
+        String pattern = "MMMMM dd, yyyy";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        this.date = simpleDateFormat.format(new Date());
     }
 
     public String getBody() {

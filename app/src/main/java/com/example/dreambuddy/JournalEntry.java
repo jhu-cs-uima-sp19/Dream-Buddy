@@ -6,6 +6,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -18,7 +19,7 @@ import java.util.Map;
 public class JournalEntry implements Serializable {
 
     /** The date created/last edited. */
-    private Date date;
+    private String date;
 
     /** The title of the journal entry. */
     private String title;
@@ -51,7 +52,9 @@ public class JournalEntry implements Serializable {
     private String id;
 
     private JournalEntry() {
-        this.date = new Date();
+        String pattern = "MMMMM dd, yyyy";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        this.date = simpleDateFormat.format(new Date());
         this.title = "";
         this.body = "";
         this.likes = 0;
@@ -70,12 +73,18 @@ public class JournalEntry implements Serializable {
         this.isPrivate = isPrivate;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
+    }
+
+    public void updateDate() {
+        String pattern = "MMMMM dd, yyyy";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        this.date = simpleDateFormat.format(new Date());
     }
 
     public String getAuthor_id() {
@@ -92,6 +101,10 @@ public class JournalEntry implements Serializable {
 
     public String getUsername() {
         return username;
+    }
+
+    public void setUsername(String username) {
+        this.username =  username;
     }
 
     public String getBody() {

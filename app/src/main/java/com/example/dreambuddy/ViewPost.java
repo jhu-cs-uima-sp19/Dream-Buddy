@@ -50,7 +50,6 @@ public class ViewPost extends AppCompatActivity {
         body.setMovementMethod(new ScrollingMovementMethod());
 
 
-
         post_user.setText(this.post.getUsername());
         post_title.setText(this.post.getTitle());
         String like_num = "" + this.post.getLikes();

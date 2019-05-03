@@ -18,8 +18,11 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class Profile extends AppCompatActivity {
 
@@ -100,15 +103,35 @@ public class Profile extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 //--SAVE Data
                 SharedPreferences.Editor editor = preferences.edit();
-                String new_name = publicNameText.getText().toString();
+                final String new_name = publicNameText.getText().toString();
                 editor.putString("username", new_name);
                 editor.apply();
 
                 final FirebaseDatabase database = FirebaseDatabase.getInstance();
-                final DatabaseReference myRef = database.getReference("users");
+                final DatabaseReference cur_user = database.getReference("users");
 
-                myRef.child(preferences.getString("user_id", "default user")).child("username").setValue(new_name);
+                final String uid = preferences.getString("user_id", "default user");
+                cur_user.child(uid).child("username").setValue(new_name);
 
+                final DatabaseReference posts = database.getReference("posts");
+
+                posts.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        for (DataSnapshot d : dataSnapshot.getChildren()) {
+                            JournalEntry post = d.getValue(JournalEntry.class);
+                            if (post.getAuthor_id().equals(uid)) {
+                                post.setUsername(new_name);
+                                post.updateToFirebase();
+                            }
+                        }
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
             }
 
             @Override
