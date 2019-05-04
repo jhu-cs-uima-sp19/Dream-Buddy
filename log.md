@@ -93,3 +93,21 @@ Brice, Evan, Ani, Muskaan
 Discussion:
 * Talked about goals for next Sprint w/ Muskaan
 * Went over things that we may not get to for this sprint
+
+#### 5/01/19
+
+Brice, Evan, Ani, Nico
+
+Discussion:
+* Prepared our final presentation for the class
+* Worked on getting the like button to work and fixed audio bugs
+
+#### 5/03/19
+
+Brice, Evan, Ani, Nico
+
+Discussion:
+* Made some final changed before meeting with Muskaan
+* Looked for any small bugs and fixed them - such as missing error checking
+
+
