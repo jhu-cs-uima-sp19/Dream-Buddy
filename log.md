@@ -72,6 +72,19 @@ Tasks Accomplished:
 * Made presentation for tomorrow
 * Implemented scrollable text for viewing posts
 
+#### 4/18/19
+
+Brice, Nico, Evan, Ani
+
+Discussion:
+* Pop-up for deleting posts
+* XML files need to work for different sized
+
+Tasks Accomplished:
+* Added some pop-ups for error checking
+* Fixed XMLs for edit post and new post screen
+* Changed color scheme
+
 
 #### 4/21/19
 
@@ -100,6 +113,10 @@ Brice, Evan, Ani, Nico
 
 Discussion:
 * Prepared our final presentation for the class
+* Audio errors
+* Error checking
+
+Tasks Accomplished:
 * Worked on getting the like button to work and fixed audio bugs
 
 #### 5/03/19
@@ -108,6 +125,11 @@ Brice, Evan, Ani, Nico
 
 Discussion:
 * Made some final changed before meeting with Muskaan
-* Looked for any small bugs and fixed them - such as missing error checking
+* Looked for any small bugs and fixed them
+
+Tasks Accomplished:
+* Added missing error checking
+* Editted rotation XML files
+* Fixed liking feature so that when you open a post you can like from there
 
 
