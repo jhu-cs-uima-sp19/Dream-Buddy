@@ -20,6 +20,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -102,23 +103,28 @@ public class Profile extends AppCompatActivity {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 boolean handled = false;
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    SharedPreferences.Editor editor = preferences.edit();
                     final String new_name = publicNameText.getText().toString();
-                    editor.putString("username", new_name);
-                    editor.apply();
+                    if (!new_name.isEmpty()) {
+                        SharedPreferences.Editor editor = preferences.edit();
+                        editor.putString("username", new_name);
+                        editor.apply();
 
-                    final FirebaseDatabase database = FirebaseDatabase.getInstance();
-                    final DatabaseReference cur_user = database.getReference("users");
+                        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+                        final DatabaseReference cur_user = database.getReference("users");
 
-                    final String uid = preferences.getString("user_id", "default user");
-                    cur_user.child(uid).child("username").setValue(new_name);
+                        final String uid = preferences.getString("user_id", "default user");
+                        cur_user.child(uid).child("username").setValue(new_name);
 
-                    InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                        InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
 
-                    updatePosts(new_name, database, uid);
+                        updatePosts(new_name, database, uid);
 
-                    handled = true;
+                        handled = true;
+                    } else {
+                        final String ErrorMsg = "Username can't be empty!";
+                        Toast.makeText(getApplicationContext(), ErrorMsg, Toast.LENGTH_LONG).show();
+                    }
                 }
                 return handled;
             }
