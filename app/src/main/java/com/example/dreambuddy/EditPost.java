@@ -22,7 +22,9 @@ import com.example.dreambuddy.R;
 
 public class EditPost extends AppCompatActivity {
 
-    private static final int DELETE_POST_REQUEST = 1;
+    private static final int DELETE_POST = 1;
+    private static final int DELETE_EDITS = 2;
+
 
     JournalEntry post;
     EditText titleEditTextView;
@@ -42,11 +44,19 @@ public class EditPost extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         // Check that it's the PopUpChecker activity with an OK result
-        if (requestCode == DELETE_POST_REQUEST) {
+        if (requestCode == DELETE_EDITS) { // if we came from delete edit button
             if (resultCode == RESULT_OK) {
 
                 // get boolean data from Intent
                 if (data.getBooleanExtra("toDelete", false)) {
+                    finish();
+                }
+            }
+        } else if (requestCode == DELETE_POST) { // if we came from delete post button
+            if (resultCode == RESULT_OK) {
+
+                if (data.getBooleanExtra("toDelete", false)) {
+                    post.deleteFromFirebase();
                     finish();
                 }
             }
@@ -60,7 +70,7 @@ public class EditPost extends AppCompatActivity {
         if (id == R.id.action_exit) {
 
             Intent intent = new Intent(this, PopUpChecker1.class);
-            startActivityForResult(intent, DELETE_POST_REQUEST);
+            startActivityForResult(intent, DELETE_EDITS);
 
             return true;
         }
@@ -98,8 +108,7 @@ public class EditPost extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(this_, PopUpChecker1.class);
-                startActivityForResult(intent, DELETE_POST_REQUEST);
-                post.deleteFromFirebase();
+                startActivityForResult(intent, DELETE_POST);
             }
         });
 

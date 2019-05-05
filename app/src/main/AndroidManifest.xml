@@ -21,6 +21,7 @@
         <activity android:name=".Waves" />
         <activity android:name=".Learn" />
         <activity android:name=".ViewLearn"/>
+        <activity android:name=".MakeComment"/>
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name">

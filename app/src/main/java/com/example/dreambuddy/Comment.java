@@ -1,5 +1,8 @@
 package com.example.dreambuddy;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -15,18 +18,14 @@ public class Comment implements Serializable {
     /** The body of the comment. */
     private String body;
 
-    /** Username of author. */
-    private String username;
-
     /** Unique user ID of the author. */
     private String author_id;
 
-    public Comment(String body, String username, String author_id) {
-        String pattern = "MMMMM dd, yyyy";
+    public Comment(String body, String author_id) {
+        String pattern = "MM/dd/yyyy";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         this.date = simpleDateFormat.format(new Date());
         this.body = body;
-        this.username = username;
         this.author_id = author_id;
     }
 
@@ -42,12 +41,6 @@ public class Comment implements Serializable {
         this.date = date;
     }
 
-    public void updateDate() {
-        String pattern = "MMMMM dd, yyyy";
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-        this.date = simpleDateFormat.format(new Date());
-    }
-
     public String getBody() {
         return body;
     }
@@ -56,20 +49,13 @@ public class Comment implements Serializable {
         this.body = body;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     public String getAuthor_id() {
         return author_id;
     }
 
-    @Override
-    public String toString() {
-        return username + ": " + body;
-    }
+//
+//    @Override
+//    public String toString() {
+//        return username + ": " + body;
+//    }
 }

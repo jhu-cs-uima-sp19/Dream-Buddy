@@ -1,9 +1,13 @@
 package com.example.dreambuddy;
 
 import android.media.MediaPlayer;
+import android.support.annotation.NonNull;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
@@ -27,14 +31,14 @@ public class JournalEntry implements Serializable {
     /** The body of the journal entry. */
     private String body;
 
-    /** The username of the author. */
-    private String username;
-
     /** The user_id of the author. */
     private String author_id;
 
     /** The number of likes given to the post. */
     private int likes;
+
+    /** The username of the author. */
+    private String username;
 
     /** The audio content of the post. */
     private MediaPlayer audioContent;
@@ -65,11 +69,10 @@ public class JournalEntry implements Serializable {
         //id is set when we save to firebase for the first time
     }
 
-    public JournalEntry(String title, String username, String author_id, String body, MediaPlayer audioContent, boolean isPrivate) {
+    public JournalEntry(String title, String author_id, String body, MediaPlayer audioContent, boolean isPrivate) {
         this();
         this.title = title;
         this.body = body;
-        this.username = username;
         this.author_id = author_id;
         this.audioContent = audioContent;
         this.isPrivate = isPrivate;
@@ -98,14 +101,6 @@ public class JournalEntry implements Serializable {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username =  username;
     }
 
     public String getBody() {
@@ -204,8 +199,9 @@ public class JournalEntry implements Serializable {
 
     public void deleteFromFirebase() {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("posts");
+        DatabaseReference myRef = database.getReference();
 
-        myRef.child(this.id).removeValue();
+        myRef.child("users").child(this.author_id).child("owned_posts").child(this.id).removeValue();
+        myRef.child("posts").child(this.id).removeValue();
     }
 }

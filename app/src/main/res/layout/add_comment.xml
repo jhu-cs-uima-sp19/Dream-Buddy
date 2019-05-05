@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ViewPost">
+
+    <TextView
+        android:id="@+id/Post_Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:text="This one is funny"
+        android:textColor="@color/colorBackgroundDark"
+        android:textSize="25sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="366dp"
+        android:layout_marginTop="12dp"
+        android:isScrollContainer="true"
+        app:layout_constraintTop_toBottomOf="@+id/Post_Title"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <EditText
+        android:id="@+id/type_comment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:gravity="top|start"
+        android:hint="Your comment"
+        android:inputType="textMultiLine"
+        android:scrollbars="vertical"
+        android:textColor="@color/colorBackgroundDark"
+        android:textSize="18sp"
+        android:maxLines="10"
+        android:isScrollContainer="true"
+        android:focusable="true"
+        android:windowSoftInputMode="adjustResize"
+        app:layout_constraintBottom_toBottomOf="@+id/view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/view"
+        app:layout_constraintVertical_bias="0.09" />
+
+    <!--<ImageButton-->
+        <!--android:id="@+id/close"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginStart="4dp"-->
+        <!--android:layout_marginTop="16dp"-->
+        <!--android:layout_marginEnd="355dp"-->
+        <!--android:layout_marginBottom="6dp"-->
+        <!--android:background="@drawable/ic_close_black_24dp"-->
+        <!--app:layout_constraintBottom_toTopOf="@+id/Post_Title"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toTopOf="parent" />-->
+
+    <TextView
+        android:id="@+id/send_comment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="130dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="66dp"
+        android:fontFamily="sans-serif-black"
+        android:text="SEND"
+        android:textColor="@color/colorPrimary"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/Post_Title"
+        app:layout_constraintTop_toTopOf="@+id/Post_Title" />
+
+</android.support.constraint.ConstraintLayout>

@@ -118,7 +118,8 @@ public class Profile extends AppCompatActivity {
                         InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                         imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
 
-                        updatePosts(new_name, database, uid);
+//                        updatePosts(new_name, database, uid);
+//                        updateComments(new_name, database, uid);
 
                         handled = true;
                     } else {
@@ -173,31 +174,58 @@ public class Profile extends AppCompatActivity {
 
     }
 
-    /**
-     * Updates all of the users posts with their new name.
-     * @param new_name the new name
-     * @param database the database
-     * @param uid the user's unique ID
-     */
-    private void updatePosts(final String new_name, final FirebaseDatabase database, final String uid) {
-        final DatabaseReference db = database.getReference();
-
-        Query owned_posts = db.child("users").child(uid).child("owned_posts");
-
-        owned_posts.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot d : dataSnapshot.getChildren()) {
-                    String post_id = (String) d.getValue();
-                    db.child("posts").child(post_id).child("username").setValue(new_name);
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-    }
+//    /**
+//     * Updates all of the users posts with their new name.
+//     * @param new_name the new name
+//     * @param database the database
+//     * @param uid the user's unique ID
+//     */
+//    private void updatePosts(final String new_name, final FirebaseDatabase database, final String uid) {
+//        final DatabaseReference db = database.getReference();
+//
+//        Query owned_posts = db.child("users").child(uid).child("owned_posts");
+//
+//        owned_posts.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                for (DataSnapshot d : dataSnapshot.getChildren()) {
+//                    String post_id = (String) d.getValue();
+//                    db.child("posts").child(post_id).child("username").setValue(new_name);
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
+//    }
+//
+//    /**
+//     * Updates all of the users comments with their new name.
+//     * @param new_name the new name
+//     * @param database the database
+//     * @param uid the user's unique ID
+//     */
+//    private void updateComments(final String new_name, final FirebaseDatabase database, final String uid) {
+//        final DatabaseReference db = database.getReference();
+//
+//        Query owned_posts = db.child("users").child(uid).child("owned_comments");
+//
+//        owned_posts.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                for (DataSnapshot d : dataSnapshot.getChildren()) {
+//                    String post_id = (String) d.getValue();
+//                    db.child("posts").child(post_id).child("username").setValue(new_name);
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
+//    }
 
 }

@@ -1,7 +1,9 @@
 package com.example.dreambuddy;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,6 +16,12 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Locale;
 
@@ -54,14 +62,28 @@ public class ViewPost extends AppCompatActivity {
 
         TextView post_title = findViewById(R.id.Post_Title);
         TextView date = findViewById(R.id.Date);
-        TextView post_user = findViewById(R.id.Post_Creator);
+        final TextView post_user = findViewById(R.id.Post_Creator);
         TextView comment_count = findViewById(R.id.commentCount);
         like_count = findViewById(R.id.likesCount);
         TextView body = findViewById(R.id.Post_Text);
         body.setMovementMethod(new ScrollingMovementMethod());
 
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("users");
 
-        post_user.setText(this.post.getUsername());
+        myRef.child(post.getAuthor_id()).child("username").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String name = dataSnapshot.getValue(String.class);
+                post_user.setText(name);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
         date.setText(this.post.getDate());
         post_title.setText(this.post.getTitle());
         String like_num = "" + this.post.getLikes();
@@ -71,7 +93,7 @@ public class ViewPost extends AppCompatActivity {
 
         Button like_area = findViewById(R.id.like_area);
 
-        Context context = this;
+        final Context context = this;
         SharedPreferences preferences = context.getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
         final String curUser_id = preferences.getString("user_id", "default user");
 
@@ -92,6 +114,15 @@ public class ViewPost extends AppCompatActivity {
             like(like_area, curUser_id);
         }
 
+        TextView comment_box = findViewById(R.id.commentBox);
+        comment_box.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, MakeComment.class);
+                intent.putExtra("post", post);
+                context.startActivity(intent);
+            }
+        });
     }
 
     private void like(final Button like_area, final String curUser_id) {
