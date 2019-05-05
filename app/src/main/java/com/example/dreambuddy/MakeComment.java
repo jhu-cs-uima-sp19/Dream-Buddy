@@ -24,6 +24,8 @@ import com.google.firebase.database.FirebaseDatabase;
 public class MakeComment extends AppCompatActivity {
 
     private static final int DELETE_COMMENT_REQUEST = 1;
+    private static final int ADD_COMMENT_SUCCESS = 2;
+
 
     ImageButton closeBtn;
 
@@ -107,7 +109,11 @@ public class MakeComment extends AppCompatActivity {
                     post.addComment(comment);
 
                     post.updateToFirebase();
-                    //close out this view
+
+                    Intent returnIntent = new Intent();
+                    returnIntent.putExtra("add_success", true);
+                    setResult(RESULT_OK,returnIntent);
+
                     finish();
                 }
                 else {

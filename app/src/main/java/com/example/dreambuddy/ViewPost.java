@@ -1,5 +1,6 @@
 package com.example.dreambuddy;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -26,10 +27,14 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.Locale;
 
 public class ViewPost extends AppCompatActivity {
+    private static final int ADD_COMMENT_REQUEST = 1;
+
     JournalEntry post;
     ImageView filled_heart;
     ImageView empty_heart;
     TextView like_count;
+    boolean post_liked;
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -63,15 +68,15 @@ public class ViewPost extends AppCompatActivity {
         TextView post_title = findViewById(R.id.Post_Title);
         TextView date = findViewById(R.id.Date);
         final TextView post_user = findViewById(R.id.Post_Creator);
-        TextView comment_count = findViewById(R.id.commentCount);
+        final TextView comment_count = findViewById(R.id.commentCount);
         like_count = findViewById(R.id.likesCount);
         TextView body = findViewById(R.id.Post_Text);
         body.setMovementMethod(new ScrollingMovementMethod());
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("users");
 
-        myRef.child(post.getAuthor_id()).child("username").addValueEventListener(new ValueEventListener() {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference userRef = database.getReference("users").child(post.getAuthor_id());
+        userRef.child("username").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String name = dataSnapshot.getValue(String.class);
@@ -84,12 +89,37 @@ public class ViewPost extends AppCompatActivity {
             }
         });
 
+        DatabaseReference postRef = database.getReference("posts").child(post.getId());
+        postRef.child("numComments").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Long numComments = dataSnapshot.getValue(Long.class);
+                comment_count.setText(String.valueOf(numComments));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        postRef.child("likes").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Long numLikes = dataSnapshot.getValue(Long.class);
+                like_count.setText(String.valueOf(numLikes));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
         date.setText(this.post.getDate());
         post_title.setText(this.post.getTitle());
-        String like_num = "" + this.post.getLikes();
-        like_count.setText(like_num);
-        body.setText(this.post.getBody());
 
+        body.setText(this.post.getBody());
 
         Button like_area = findViewById(R.id.like_area);
 
@@ -97,7 +127,7 @@ public class ViewPost extends AppCompatActivity {
         SharedPreferences preferences = context.getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
         final String curUser_id = preferences.getString("user_id", "default user");
 
-        boolean post_liked = post.liked_by_user(curUser_id);
+        post_liked = post.liked_by_user(curUser_id);
 
         filled_heart = findViewById(R.id.filled_heart);
         empty_heart = findViewById(R.id.empty_heart);
@@ -105,14 +135,21 @@ public class ViewPost extends AppCompatActivity {
         if (post_liked) {
             filled_heart.setVisibility(View.VISIBLE);
             empty_heart.setVisibility(View.INVISIBLE);
-
-            unlike(like_area, curUser_id);
         } else {
             empty_heart.setVisibility(View.VISIBLE);
             filled_heart.setVisibility(View.INVISIBLE);
-
-            like(like_area, curUser_id);
         }
+
+        like_area.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (post_liked) {
+                    unlike(curUser_id);
+                } else {
+                    like(curUser_id);
+                }
+            }
+        });
 
         TextView comment_box = findViewById(R.id.commentBox);
         comment_box.setOnClickListener(new View.OnClickListener() {
@@ -123,37 +160,35 @@ public class ViewPost extends AppCompatActivity {
                 context.startActivity(intent);
             }
         });
-    }
 
-    private void like(final Button like_area, final String curUser_id) {
-        like_area.setOnClickListener(new View.OnClickListener() {
+        comment_count.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                post.addUserLike(curUser_id);
-                post.setLikes(post.getLikes() + 1);
-                post.updateToFirebase();
-
-                empty_heart.setVisibility(View.INVISIBLE);
-                filled_heart.setVisibility(View.VISIBLE);
-                like_count.setText(String.format(Locale.getDefault(), "%d", post.getLikes()));
-                unlike(like_area, curUser_id);
+                Intent intent = new Intent(context, MakeComment.class);
+                intent.putExtra("post", post);
+                context.startActivity(intent);
             }
         });
     }
 
-    private void unlike(final Button like_area, final String curUser_id) {
-        like_area.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                post.removeUserLike(curUser_id);
-                post.setLikes(post.getLikes() - 1);
-                post.updateToFirebase();
+    private void like(final String curUser_id) {
+        post.addUserLike(curUser_id);
+        post.setLikes(post.getLikes() + 1);
+        post.updateToFirebase();
+        post_liked = true;
 
-                empty_heart.setVisibility(View.VISIBLE);
-                filled_heart.setVisibility(View.INVISIBLE);
-                like_count.setText(String.format(Locale.getDefault(), "%d", post.getLikes()));
-                like(like_area, curUser_id);
-            }
-        });
+        empty_heart.setVisibility(View.INVISIBLE);
+        filled_heart.setVisibility(View.VISIBLE);
     }
+
+    private void unlike(final String curUser_id) {
+        post.removeUserLike(curUser_id);
+        post.setLikes(post.getLikes() - 1);
+        post.updateToFirebase();
+        post_liked = false;
+
+        empty_heart.setVisibility(View.VISIBLE);
+        filled_heart.setVisibility(View.INVISIBLE);
+    }
+
 }

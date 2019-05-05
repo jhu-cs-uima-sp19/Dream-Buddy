@@ -46,6 +46,9 @@ public class JournalEntry implements Serializable {
     /** A list of comments given to the post. */
     private List<Comment> comments;
 
+    /** Number of comments given to the post. */
+    private int numComments;
+
     /** A list of user ids who liked the post. */
     private List<String> liked_by_whom;
 
@@ -137,6 +140,14 @@ public class JournalEntry implements Serializable {
         return comments;
     }
 
+    public int getNumComments() {
+        return numComments;
+    }
+
+    public void setNumComments(int numComments) {
+        this.numComments = numComments;
+    }
+
     public void setComments(List<Comment> comments) {
         this.comments = comments;
     }
@@ -155,10 +166,12 @@ public class JournalEntry implements Serializable {
 
     public void addComment(Comment comment) {
         this.comments.add(comment);
+        numComments = comments.size();
     }
 
     public Comment deleteComment(Comment comment) {
         this.comments.remove(comment);
+        numComments = comments.size();
         return comment;
     }
 

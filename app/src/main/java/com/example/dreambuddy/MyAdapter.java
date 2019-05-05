@@ -35,6 +35,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         // each data item is just a string in this case
         public TextView titleTextView;
         public TextView likesTextView;
+        public TextView commentsTextView;
         public ImageButton editImageButton;
         public AppCompatImageView empty_heart;
         public AppCompatImageView filled_heart;
@@ -48,6 +49,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             like_area = v.findViewById(R.id.like_area);
             filled_heart = v.findViewById(R.id.filled_heart);
             empty_heart = v.findViewById(R.id.empty_heart);
+            commentsTextView = v.findViewById(R.id.commentCount);
 
         }
     }
@@ -82,6 +84,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         // - replace the contents of the view with that element
         holder.titleTextView.setText(curEntry.getTitle());
         holder.likesTextView.setText(String.valueOf(curEntry.getLikes()));
+        holder.commentsTextView.setText(String.valueOf(curEntry.getNumComments()));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
