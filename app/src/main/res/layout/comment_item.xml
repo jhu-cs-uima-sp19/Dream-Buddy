@@ -24,7 +24,6 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="4dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
         android:text="test comment test comment test comment test comment test comment test comment test comment test comment test comment"

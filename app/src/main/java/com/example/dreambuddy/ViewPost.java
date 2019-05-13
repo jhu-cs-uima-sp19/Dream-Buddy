@@ -9,6 +9,8 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatImageView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.method.ScrollingMovementMethod;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,6 +26,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.List;
 import java.util.Locale;
 
 public class ViewPost extends AppCompatActivity {
@@ -34,6 +37,10 @@ public class ViewPost extends AppCompatActivity {
     ImageView empty_heart;
     TextView like_count;
     boolean post_liked;
+    List<Comment> comments;
+
+    CommentAdapter adapter;
+    RecyclerView rvComments;
 
 
     @Override
@@ -51,6 +58,15 @@ public class ViewPost extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        adapter.notifyDataSetChanged();
+        rvComments = (RecyclerView) findViewById(R.id.rvComments);
+        rvComments.setAdapter(adapter);
+        rvComments.setLayoutManager(new LinearLayoutManager(this));
     }
 
     @Override
@@ -161,14 +177,20 @@ public class ViewPost extends AppCompatActivity {
             }
         });
 
-        comment_count.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, MakeComment.class);
-                intent.putExtra("post", post);
-                context.startActivity(intent);
-            }
-        });
+//        comment_count.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(context, MakeComment.class);
+//                intent.putExtra("post", post);
+//                context.startActivity(intent);
+//            }
+//        });
+
+        comments = post.getComments();
+        adapter = new CommentAdapter(comments);
+        rvComments = (RecyclerView) findViewById(R.id.rvComments);
+        rvComments.setAdapter(adapter);
+        rvComments.setLayoutManager(new LinearLayoutManager(this));
     }
 
     private void like(final String curUser_id) {
