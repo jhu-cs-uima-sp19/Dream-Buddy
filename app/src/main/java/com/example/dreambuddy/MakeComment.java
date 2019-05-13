@@ -24,7 +24,6 @@ import com.google.firebase.database.FirebaseDatabase;
 public class MakeComment extends AppCompatActivity {
 
     private static final int DELETE_COMMENT_REQUEST = 1;
-    private static final int ADD_COMMENT_SUCCESS = 2;
 
 
     ImageButton closeBtn;
@@ -59,6 +58,7 @@ public class MakeComment extends AppCompatActivity {
 
                 // Get boolean data from Intent
                 if (data.getBooleanExtra("toDelete", false)) {
+                    setResult(RESULT_OK, new Intent().putExtra("add_success", false));
                     finish();
                 }
             }
@@ -113,9 +113,10 @@ public class MakeComment extends AppCompatActivity {
 
                     post.updateToFirebase();
 
-                    Intent returnIntent = new Intent();
-                    returnIntent.putExtra("add_success", true);
-                    setResult(RESULT_OK,returnIntent);
+                    Intent toReturn = new Intent();
+                    toReturn.putExtra("add_success", true);
+                    toReturn.putExtra("body", text);
+                    setResult(RESULT_OK, toReturn);
 
                     finish();
                 }
@@ -126,6 +127,5 @@ public class MakeComment extends AppCompatActivity {
             }
         });
     }
-
 
 }

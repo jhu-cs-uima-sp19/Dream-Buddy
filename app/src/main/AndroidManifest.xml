@@ -23,7 +23,8 @@
         <activity android:name=".ViewLearn"/>
         <activity
             android:name=".MakeComment"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan"
+            android:launchMode="singleTop" />
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name">

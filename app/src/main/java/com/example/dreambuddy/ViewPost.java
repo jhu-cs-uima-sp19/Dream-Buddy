@@ -1,10 +1,12 @@
 package com.example.dreambuddy;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -30,18 +32,17 @@ import java.util.List;
 import java.util.Locale;
 
 public class ViewPost extends AppCompatActivity {
-    private static final int ADD_COMMENT_REQUEST = 1;
-
     JournalEntry post;
     ImageView filled_heart;
     ImageView empty_heart;
     TextView like_count;
     boolean post_liked;
     List<Comment> comments;
+    String uid;
 
     CommentAdapter adapter;
-    RecyclerView rvComments;
 
+    final private int ADDING_COMMENT = 1;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -61,12 +62,16 @@ public class ViewPost extends AppCompatActivity {
     }
 
     @Override
-    public void onResume(){
-        super.onResume();
-        adapter.notifyDataSetChanged();
-        rvComments = (RecyclerView) findViewById(R.id.rvComments);
-        rvComments.setAdapter(adapter);
-        rvComments.setLayoutManager(new LinearLayoutManager(this));
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (requestCode == ADDING_COMMENT && resultCode == RESULT_OK) {
+            if (data.getBooleanExtra("add_success", true)) {
+                String body = data.getStringExtra("body");
+                if (body != null && !body.isEmpty()) {
+                    comments.add(new Comment(body, uid));
+                    adapter.notifyDataSetChanged();
+                }
+            }
+        }
     }
 
     @Override
@@ -139,9 +144,10 @@ public class ViewPost extends AppCompatActivity {
 
         Button like_area = findViewById(R.id.like_area);
 
-        final Context context = this;
+        final ViewPost context = this;
         SharedPreferences preferences = context.getSharedPreferences("MyPreferences", Context.MODE_PRIVATE);
         final String curUser_id = preferences.getString("user_id", "default user");
+        uid = curUser_id;
 
         post_liked = post.liked_by_user(curUser_id);
 
@@ -173,7 +179,7 @@ public class ViewPost extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(context, MakeComment.class);
                 intent.putExtra("post", post);
-                context.startActivity(intent);
+                context.startActivityForResult(intent, ADDING_COMMENT);
             }
         });
 
@@ -187,11 +193,30 @@ public class ViewPost extends AppCompatActivity {
 //        });
 
         comments = post.getComments();
-        adapter = new CommentAdapter(comments);
-        rvComments = (RecyclerView) findViewById(R.id.rvComments);
+        setData(comments);
+
+        RecyclerView rvComments = (RecyclerView) findViewById(R.id.rvComments);
         rvComments.setAdapter(adapter);
         rvComments.setLayoutManager(new LinearLayoutManager(this));
+
+        postRef.child("comments").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
+
+    private void setData(List<Comment> data){
+        adapter = new CommentAdapter(data);
+        adapter.notifyDataSetChanged();
+    }
+
 
     private void like(final String curUser_id) {
         post.addUserLike(curUser_id);
