@@ -86,9 +86,12 @@ public class MakeComment extends AppCompatActivity {
 //            }
 //        });
 
-        final EditText post_title = this.findViewById(R.id.Post_Title);
+        final TextView post_title = this.findViewById(R.id.Post_Title);
         final EditText comment_box = this.findViewById(R.id.type_comment);
         final TextView send_comment = this.findViewById(R.id.send_comment);
+
+
+        post_title.setText(post.getTitle());
 
         comment_box.setImeOptions(EditorInfo.IME_ACTION_DONE);
         comment_box.setRawInputType(InputType.TYPE_CLASS_TEXT);

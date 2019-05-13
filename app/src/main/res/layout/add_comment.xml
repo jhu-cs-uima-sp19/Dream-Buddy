@@ -8,13 +8,16 @@
 
     <TextView
         android:id="@+id/Post_Title"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:text="This one is funny"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:breakStrategy="simple"
+        android:text="This one has an obnoxiously long title for testing purposes"
         android:textColor="@color/colorBackgroundDark"
         android:textSize="25sp"
+        app:layout_constraintEnd_toStartOf="@+id/send_comment"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -26,6 +29,17 @@
         android:isScrollContainer="true"
         app:layout_constraintTop_toBottomOf="@+id/Post_Title"
         tools:layout_editor_absoluteX="0dp" />
+
+    <View
+        android:id="@+id/Divider"
+        style="@style/Divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Post_Title" />
 
     <EditText
         android:id="@+id/type_comment"
@@ -39,7 +53,6 @@
         android:scrollbars="vertical"
         android:textColor="@color/colorBackgroundDark"
         android:textSize="18sp"
-        android:maxLines="10"
         android:isScrollContainer="true"
         android:focusable="true"
         android:windowSoftInputMode="adjustResize"
@@ -68,18 +81,14 @@
         android:id="@+id/send_comment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="130dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="66dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="20dp"
         android:fontFamily="sans-serif-black"
         android:text="SEND"
         android:textColor="@color/colorPrimary"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/view"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/Post_Title"
-        app:layout_constraintTop_toTopOf="@+id/Post_Title" />
+        app:layout_constraintTop_toTopOf="@id/Post_Title" />
 
 </android.support.constraint.ConstraintLayout>
