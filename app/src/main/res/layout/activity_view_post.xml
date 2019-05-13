@@ -130,23 +130,24 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <View
-                    android:id="@+id/view"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="16dp"
-                    android:background="@color/colorBackgroundDark"
-                    app:layout_constraintTop_toBottomOf="@id/comment"
-                    tools:layout_editor_absoluteX="0dp" />
             </android.support.constraint.ConstraintLayout>
+
+            <!--<View-->
+                <!--android:id="@+id/divider2"-->
+                <!--style="@style/Divider"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="1dp"-->
+                <!--app:layout_constraintEnd_toEndOf="parent"-->
+                <!--app:layout_constraintStart_toStartOf="parent"-->
+                <!--app:layout_constraintTop_toBottomOf="@+id/Post_Title" />-->
 
             <TextView
                 android:id="@+id/Post_Text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="24dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="16dp"
                 android:scrollbars="vertical"
                 android:text="Today I dreamt of animals and rainbows and all kinds of amazing things"
                 android:textColor="@color/colorBackgroundDark"
@@ -154,6 +155,38 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/view" />
+
+            <View
+                android:id="@+id/divider"
+                style="@style/Divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintBottom_toTopOf="@+id/view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Post_Title" />
+
+            <TextView
+                android:id="@+id/CommentBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="COMMENTS"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                android:textColor="@color/colorAccentDark"
+                android:textSize="18sp" />
+
+            <View
+                android:id="@+id/divider3"
+                style="@style/Divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                app:layout_constraintBottom_toTopOf="@+id/view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Post_Title" />
         </LinearLayout>
     </ScrollView>
 
