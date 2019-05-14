@@ -196,6 +196,7 @@ public class ViewPost extends AppCompatActivity {
         setData(comments);
 
         RecyclerView rvComments = (RecyclerView) findViewById(R.id.rvComments);
+        rvComments.setNestedScrollingEnabled(false);
         rvComments.setAdapter(adapter);
         rvComments.setLayoutManager(new LinearLayoutManager(this));
 
