@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--PHONE SIZES-->
+
+    <dimen name="titleSize">25sp</dimen>
+    <dimen name="iconSize">20sp</dimen>
+    <dimen name="textSize">20sp</dimen>
+    <dimen name="subtitleSize">15sp</dimen>
+
+
+</resources>

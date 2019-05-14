@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--TABLET SIZES-->
+    <dimen name="titleSize">40sp</dimen>
+    <dimen name="iconSize">30sp</dimen>
+    <dimen name="textSize">25sp</dimen>
+    <dimen name="subtitleSize">20sp</dimen>
+
+
+</resources>

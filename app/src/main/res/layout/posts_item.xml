@@ -25,6 +25,7 @@
         android:ellipsize="end"
         android:maxLines="1"
         android:text="Large Text"
+        android:textSize="@dimen/textSize"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
         app:layout_constraintBottom_toTopOf="@+id/empty_heart"
         app:layout_constraintEnd_toEndOf="parent"
@@ -33,18 +34,19 @@
 
     <TextView
         android:id="@+id/likesCount"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="@dimen/iconSize"
+        android:layout_height="@dimen/iconSize"
         android:layout_marginStart="12dp"
         android:text="0"
+        android:textSize="@dimen/subtitleSize"
         android:textAlignment="textStart"
         app:layout_constraintBottom_toBottomOf="@+id/empty_heart"
         app:layout_constraintStart_toEndOf="@+id/empty_heart" />
 
     <ImageView
         android:id="@+id/empty_heart"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="@dimen/iconSize"
+        android:layout_height="@dimen/iconSize"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="24dp"
         android:contentDescription="TODO"
@@ -55,8 +57,8 @@
 
     <ImageView
         android:id="@+id/filled_heart"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="@dimen/iconSize"
+        android:layout_height="@dimen/iconSize"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -65,8 +67,8 @@
 
     <ImageView
         android:id="@+id/comment"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="@dimen/iconSize"
+        android:layout_height="@dimen/iconSize"
         android:layout_marginStart="24dp"
         android:tint="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="@+id/likesCount"
@@ -75,18 +77,19 @@
 
     <TextView
         android:id="@+id/commentCount"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="@dimen/iconSize"
+        android:layout_height="@dimen/iconSize"
         android:layout_marginStart="12dp"
         android:text="0"
+        android:textSize="@dimen/subtitleSize"
         android:textAlignment="textStart"
         app:layout_constraintBottom_toBottomOf="@+id/comment"
         app:layout_constraintStart_toEndOf="@+id/comment" />
 
     <ImageButton
         android:id="@+id/editButton"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="@dimen/iconSize"
+        android:layout_height="@dimen/iconSize"
         android:layout_marginEnd="16dp"
         android:adjustViewBounds="false"
         android:background="@drawable/baseline_edit_white_48dp"
